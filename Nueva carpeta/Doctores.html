@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Doctores</title>
+
+<style>
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: #f4f4f4;
+}
+
+/* HEADER */
+header{
+    background: #27ae60;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    border-bottom: 5px solid #222;
+}
+
+/* NAV */
+nav{
+    background: #222;
+    padding: 15px;
+}
+
+nav ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: white;
+    background: #27ae60;
+    padding: 10px 18px;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+nav ul li a:hover{
+    background: #58d68d;
+    transform: scale(1.05);
+}
+
+/* MAIN */
+main{
+    width: 90%;
+    margin: 30px auto;
+    background: white;
+    border: 5px solid black;
+    padding: 20px;
+}
+
+main h1{
+    text-align: center;
+    margin-bottom: 25px;
+    color: #222;
+}
+
+/* ESTRUCTURA */
+.contenedor{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 20px;
+}
+
+/* SIDEBAR */
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.caja{
+    background: #27ae60;
+    height: 180px;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+/* CONTENIDO */
+.contenido{
+    background: #fafafa;
+    border: 3px solid black;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* TARJETAS */
+.card{
+    background: white;
+    border-left: 10px solid #27ae60;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+}
+
+.card h2{
+    color: #222;
+    margin-bottom: 15px;
+}
+
+.card p{
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+/* FOOTER */
+footer{
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    border-top: 5px solid #27ae60;
+}
+
+footer h3{
+    color: #27ae60;
+    margin-bottom: 10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+
+    🩺 Doctores
+
+</header>
+
+<!-- NAV -->
+<nav>
+
+    <ul>
+
+        <li><a href="Inicio.html">Inicio</a></li>
+
+        <li><a href="pacientes.html">Pacientes</a></li>
+
+        <li><a href="medicamentos.html">Medicamentos</a></li>
+
+    </ul>
+
+</nav>
+
+<!-- MAIN -->
+<main>
+
+    <h1>Lista de Doctores</h1>
+
+    <div class="contenedor">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+
+            <div class="caja"></div>
+
+            <div class="caja"></div>
+
+        </div>
+
+        <!-- CONTENIDO -->
+        <div class="contenido">
+
+            <!-- DOCTOR 1 -->
+            <div class="card">
+
+                <h2>Dra. María González Ruiz</h2>
+
+                <p><strong>ID:</strong> D001</p>
+                <p><strong>Edad:</strong> 39 años</p>
+                <p><strong>Sexo:</strong> Femenino</p>
+                <p><strong>Especialidad:</strong> Ginecología</p>
+                <p><strong>Cédula Profesional:</strong> 2345678</p>
+                <p><strong>Teléfono:</strong> 555-234-5678</p>
+                <p><strong>Correo:</strong> maria.gonzalez@consultorio.com</p>
+                <p><strong>Horario:</strong> Lunes a Viernes 14:00 - 20:00</p>
+                <p><strong>Pacientes asignados:</strong> Ana Martínez Díaz</p>
+
+            </div>
+
+            <!-- DOCTOR 2 -->
+            <div class="card">
+
+                <h2>Dr. Roberto Sánchez Díaz</h2>
+
+                <p><strong>ID:</strong> D002</p>
+                <p><strong>Edad:</strong> 50 años</p>
+                <p><strong>Sexo:</strong> Masculino</p>
+                <p><strong>Especialidad:</strong> Cardiología</p>
+                <p><strong>Cédula Profesional:</strong> 3456789</p>
+                <p><strong>Teléfono:</strong> 555-345-6789</p>
+                <p><strong>Correo:</strong> roberto.sanchez@consultorio.com</p>
+                <p><strong>Horario:</strong> Martes y Jueves 9:00 - 15:00</p>
+                <p><strong>Pacientes asignados:</strong> Luis Fernández Soto</p>
+
+            </div>
+
+            <!-- DOCTOR 3 -->
+            <div class="card">
+
+                <h2>Dra. Laura Martínez Castro</h2>
+
+                <p><strong>ID:</strong> D003</p>
+                <p><strong>Edad:</strong> 42 años</p>
+                <p><strong>Sexo:</strong> Femenino</p>
+                <p><strong>Especialidad:</strong> Endocrinología</p>
+                <p><strong>Cédula Profesional:</strong> 4567890</p>
+                <p><strong>Teléfono:</strong> 555-456-7890</p>
+                <p><strong>Correo:</strong> laura.martinez@consultorio.com</p>
+                <p><strong>Horario:</strong> Lunes, Miércoles y Viernes 10:00 - 16:00</p>
+                <p><strong>Pacientes asignados:</strong> Carlos Ramírez Torres, Laura Méndez Castro, Valentina Rojas Núñez</p>
+
+            </div>
+
+            <!-- DOCTOR 4 -->
+            <div class="card">
+
+                <h2>Dr. Alejandro Torres Medina</h2>
+
+                <p><strong>ID:</strong> D004</p>
+                <p><strong>Edad:</strong> 45 años</p>
+                <p><strong>Sexo:</strong> Masculino</p>
+                <p><strong>Especialidad:</strong> Neurología</p>
+                <p><strong>Cédula Profesional:</strong> 5678901</p>
+                <p><strong>Teléfono:</strong> 555-567-8901</p>
+                <p><strong>Correo:</strong> alejandro.torres@consultorio.com</p>
+                <p><strong>Horario:</strong> Lunes a Viernes 8:00 - 14:00</p>
+                <p><strong>Pacientes asignados:</strong> Sofía Herrera León, Diego Morales Cruz</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+
+    <h3>Datos del Alumno</h3>
+
+    <p>Kevin Raul Gonzalez Chavez</p>
+
+    <p>No. Control: 23308051280594</p>
+
+    <p>Grupo: 4-I</p>
+
+    <p>Especialidad: Programación</p>
+
+</footer>
+
+</body>
+</html>

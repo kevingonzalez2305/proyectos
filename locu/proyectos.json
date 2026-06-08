@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "icon": "🛒",
+    "titulo": "E-Commerce Core",
+    "descripcion": "Plataforma de comercio electrónico de alta velocidad con gestión de estado global, pasarela de pago simulada y carga diferida de imágenes.",
+    "tags": ["React", "Next.js", "Tailwind", "Stripe API"],
+    "link": "https://github.com/tu-usuario/ecommerce"
+  },
+  {
+    "id": 2,
+    "icon": "📊",
+    "titulo": "SaaS Analytics Dashboard",
+    "descripcion": "Panel analítico interactivo orientado a la visualización de datos financieros en tiempo real con arquitecturas de gráficos optimizadas.",
+    "tags": ["TypeScript", "Chart.js", "WebSockets"],
+    "link": "https://github.com/tu-usuario/analytics"
+  },
+  {
+    "id": 3,
+    "icon": "🌤️",
+    "titulo": "Atmosphere App",
+    "descripcion": "Aplicación meteorológica predictiva que geolocaliza al usuario y consume APIs climáticas avanzadas con hermosas transiciones dinámicas.",
+    "tags": ["JavaScript ES6", "REST API", "CSS Motion"],
+    "link": "https://github.com/tu-usuario/weather"
+  }
+]

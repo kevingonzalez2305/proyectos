@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Medicamentos</title>
+
+<style>
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: #f4f4f4;
+}
+
+/* HEADER */
+header{
+    background: #f1c40f;
+    color: black;
+    padding: 20px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    border-bottom: 5px solid #222;
+}
+
+/* NAV */
+nav{
+    background: #222;
+    padding: 15px;
+}
+
+nav ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: white;
+    background: #f1c40f;
+    padding: 10px 18px;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+nav ul li a:hover{
+    background: #ffd93d;
+    transform: scale(1.05);
+}
+
+/* CONTENIDO */
+main{
+    width: 85%;
+    margin: 30px auto;
+    background: white;
+    border: 5px solid black;
+    padding: 20px;
+}
+
+/* TITULO */
+main h1{
+    text-align: center;
+    margin-bottom: 25px;
+    color: #222;
+}
+
+/* BUSCADOR */
+.buscador{
+    width: 100%;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.buscador input{
+    width: 70%;
+    padding: 15px;
+    border: 3px solid #f1c40f;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.buscador input:focus{
+    box-shadow: 0px 0px 10px rgba(241,196,15,0.7);
+}
+
+/* ESTRUCTURA */
+.contenedor{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+/* LADO IZQUIERDO */
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.caja{
+    background: #f1c40f;
+    height: 150px;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+/* CONTENIDO DERECHO */
+.contenido{
+    background: #fafafa;
+    border: 3px solid black;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* TARJETAS */
+.card{
+    background: white;
+    border-left: 10px solid #f1c40f;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    border-radius: 10px;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+}
+
+.card h2{
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.card p{
+    margin: 5px 0;
+}
+
+/* FOOTER */
+footer{
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    border-top: 5px solid #f1c40f;
+}
+
+footer h3{
+    color: #f1c40f;
+    margin-bottom: 10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    💊 Medicamentos
+</header>
+
+<!-- MENU -->
+<nav>
+    <ul>
+        <li><a href="Inicio.html">Inicio</a></li>
+        <li><a href="pacientes.html">Pacientes</a></li>
+        <li><a href="doctores.html">Doctores</a></li>
+    </ul>
+</nav>
+
+<!-- CONTENIDO -->
+<main>
+
+    <h1>Lista de Medicamentos</h1>
+
+    <!-- BUSCADOR -->
+    <div class="buscador">
+        <input type="text" id="buscar" placeholder="🔍 Buscar medicamento, paciente o ID...">
+    </div>
+
+    <div class="contenedor">
+
+        <!-- LADO IZQUIERDO -->
+        <div class="sidebar">
+
+            <div class="caja"></div>
+
+            <div class="caja"></div>
+
+        </div>
+
+        <!-- CONTENIDO DERECHO -->
+        <div class="contenido" id="listaMedicamentos">
+
+            <!-- MEDICAMENTO 1 -->
+            <div class="card">
+                <h2>Metformina</h2>
+                <p><strong>ID:</strong> M001</p>
+                <p><strong>Paciente:</strong> Carlos Ramírez Torres</p>
+                <p><strong>Consumo indicado:</strong> 850 mg cada 12 horas</p>
+            </div>
+
+            <!-- MEDICAMENTO 2 -->
+            <div class="card">
+                <h2>Levotiroxina</h2>
+                <p><strong>ID:</strong> M003</p>
+                <p><strong>Paciente:</strong> Laura Méndez Castro</p>
+                <p><strong>Consumo indicado:</strong> 100 mcg cada 24 horas</p>
+            </div>
+
+            <!-- MEDICAMENTO 3 -->
+            <div class="card">
+                <h2>Paracetamol</h2>
+                <p><strong>ID:</strong> M004</p>
+                <p><strong>Paciente:</strong> Pedro Sánchez Molina</p>
+                <p><strong>Consumo indicado:</strong> 500 mg cada 8 horas</p>
+            </div>
+
+            <!-- MEDICAMENTO 4 -->
+            <div class="card">
+                <h2>Sumatriptán</h2>
+                <p><strong>ID:</strong> M005</p>
+                <p><strong>Paciente:</strong> Sofía Herrera León</p>
+                <p><strong>Consumo indicado:</strong> 50 mg al inicio de la crisis</p>
+            </div>
+
+            <!-- MEDICAMENTO 5 -->
+            <div class="card">
+                <h2>Sulfato ferroso</h2>
+                <p><strong>ID:</strong> M006</p>
+                <p><strong>Paciente:</strong> Valentina Rojas Núñez</p>
+                <p><strong>Consumo indicado:</strong> 325 mg cada 24 horas</p>
+            </div>
+
+            <!-- MEDICAMENTO 6 -->
+            <div class="card">
+                <h2>AINEs</h2>
+                <p><strong>ID:</strong> M007</p>
+                <p><strong>Paciente:</strong> Diego Morales Cruz</p>
+                <p><strong>Consumo indicado:</strong> Cada 8 horas según dolor</p>
+            </div>
+
+            <!-- MEDICAMENTO 7 -->
+            <div class="card">
+                <h2>Nitratos</h2>
+                <p><strong>ID:</strong> M008</p>
+                <p><strong>Paciente:</strong> Luis Fernández Soto</p>
+                <p><strong>Consumo indicado:</strong> Según indicación médica en caso de dolor torácico</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+
+    <h3>Datos del Alumno</h3>
+
+    <p>Kevin Raul Gonzalez Chavez</p>
+
+    <p>No. Control: 23308051280594</p>
+
+    <p>Grupo: 4-I</p>
+
+    <p>Especialidad: Programación</p>
+
+</footer>
+
+<!-- SCRIPT BUSCADOR -->
+<script>
+
+const buscador = document.getElementById("buscar");
+
+buscador.addEventListener("keyup", function(){
+
+    let texto = buscador.value.toLowerCase();
+
+    let tarjetas = document.querySelectorAll(".card");
+
+    tarjetas.forEach(function(card){
+
+        let contenido = card.textContent.toLowerCase();
+
+        if(contenido.includes(texto)){
+            card.style.display = "block";
+        }else{
+            card.style.display = "none";
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

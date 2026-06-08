@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Premium — Dev &amp; Designer</title>
+  
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  
+  <!-- Enlace al archivo CSS externo -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Capas de Efectos Visuales de Fondo -->
+  <div class="noise" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="glow2" aria-hidden="true"></div>
+
+  <!-- Encabezado y Navegación Global -->
+  <header>
+    <nav>
+      <a href="#" class="logo" aria-label="Inicio">tu.nombre</a>
+      <div class="nav-links">
+        <a href="#proyectos">proyectos</a>
+        <a href="#filosofia">enfoque</a>
+        <a href="#skills">herramientas</a>
+        <a href="#contacto">contacto</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main>
+    
+    <!-- SECCIÓN HERO -->
+    <section class="hero" id="inicio">
+      <div class="badge">
+        <span class="dot" aria-hidden="true"></span>
+        Disponible para nuevos proyectos
+      </div>
+      
+      <h1>Frontend<br>Developer<br><span>&amp; Designer</span></h1>
+      
+      <p class="subtitle">
+        Construyo productos digitales de alto rendimiento donde el diseño sofisticado se encuentra con un código impecable y escalable.
+      </p>
+      
+      <div class="hero-btns">
+        <a href="#proyectos" class="btn-primary">Explorar Proyectos</a>
+        <a href="tu-cv.pdf" download class="btn-outline">
+          Descargar CV <span style="margin-left: 8px;">↓</span>
+        </a>
+      </div>
+      
+      <!-- Métricas / Datos Clave de Impacto -->
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">12+</div>
+          <div class="stat-label">Proyectos Completados</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">2+</div>
+          <div class="stat-label">Años de Experiencia</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">99%</div>
+          <div class="stat-label">Rendimiento en Lighthouse</div>
+        </div>
+      </div>
+      
+      <div class="scroll-hint" aria-hidden="true">
+        <span class="scroll-line"></span> Desliza para explorar
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECCIÓN PROYECTOS DESTACADOS -->
+    <section id="proyectos">
+      <div class="section-label">Portafolio Seleccionado</div>
+      <h2>Proyectos con propósito</h2>
+      
+      <div class="projects-grid">
+        <!-- Proyecto 1 -->
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">🛒</div>
+          <h3>E-Commerce Core</h3>
+          <p>Plataforma de comercio electrónico de alta velocidad con gestión de estado global, pasarela de pago simulada y carga diferida de imágenes.</p>
+          <div class="tags">
+            <span class="tag">React</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">Tailwind</span>
+            <span class="tag">Stripe API</span>
+          </div>
+        </article>
+        
+        <!-- Proyecto 2 -->
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">📊</div>
+          <h3>SaaS Analytics Dashboard</h3>
+          <p>Panel analítico interactivo orientado a la visualización de datos financieros en tiempo real con arquitecturas de gráficos optimizadas.</p>
+          <div class="tags">
+            <span class="tag">TypeScript</span>
+            <span class="tag">Chart.js</span>
+            <span class="tag">WebSockets</span>
+          </div>
+        </article>
+
+        <!-- Proyecto 3 -->
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">🌤️</div>
+          <h3>Atmosphere App</h3>
+          <p>Aplicación meteorológica predictiva que geolocaliza al usuario y consume APIs climáticas avanzadas con hermosas transiciones dinámicas.</p>
+          <div class="tags">
+            <span class="tag">JavaScript ES6</span>
+            <span class="tag">REST API</span>
+            <span class="tag">CSS Motion</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- NUEVA SECCIÓN INNOVADORA: FILOSOFÍA DE TRABAJO -->
+    <section id="filosofia">
+      <div class="section-label">Mi Mentalidad</div>
+      <h2>No solo escribo código, diseño soluciones</h2>
+      
+      <div class="projects-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+        <div class="project-card" style="cursor: default;">
+          <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--accent);">⚡ Rendimiento primero</h3>
+          <p style="margin-bottom: 0;">Un diseño hermoso no sirve de nada si tarda en cargar. Optimizo recursos, estructuro el código limpiamente y reduzco la latencia al mínimo para asegurar experiencias instantáneas.</p>
+        </div>
+        <div class="project-card" style="cursor: default;">
+          <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--accent2);">🧠 Código con empatía</h3>
+          <p style="margin-bottom: 0;">Escribo software pensando en el futuro yo que mantendrá el código y, sobre todo, en los usuarios finales. Accesibilidad (a11y) y semántica no son opcionales.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECCIÓN HABILIDADES (DISEÑO BENTO GRID) -->
+    <section id="skills">
+      <div class="section-label">Stack Tecnológico</div>
+      <h2>Herramientas y ecosistema</h2>
+      
+      <div class="skills-grid">
+        <!-- Primarias (Destacadas) -->
+        <div class="skill-item">
+          <div class="skill-icon" aria-hidden="true">⚛️</div>
+          <div class="skill-name">React / Next.js</div>
+          <div class="skill-level">Especialista</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon" aria-hidden="true">⚡</div>
+          <div class="skill-name">JavaScript</div>
+          <div class="skill-level">Avanzado</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon" aria-hidden="true">🎨</div>
+          <div class="skill-name">CSS3 / Tailwind</div>
+          <div class="skill-level">Avanzado</div>
+        </div>
+        <!-- Secundarias -->
+        <div class="skill-item">
+          <div class="skill-icon" aria-hidden="true">🌐</div>
+          <div class="skill-name">HTML5 Semántico</div>
+          <div class="skill-level">Sólido</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon" aria-hidden="true">🔧</div>
+          <div class="skill-name">Git &amp; GitHub</div>
+          <div class="skill-level">Sólido</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon" aria-hidden="true">🐍</div>
+          <div class="skill-name">Node.js / Python</div>
+          <div class="skill-level">Intermedio</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon" aria-hidden="true">📐</div>
+          <div class="skill-name">UI/UX (Figma)</div>
+          <div class="skill-level">Intermedio</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-icon" aria-hidden="true">🚀</div>
+          <div class="skill-name">Testing (Jest)</div>
+          <div class="skill-level">Básico</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECCIÓN CONTACTO -->
+    <section id="contacto">
+      <div class="contact-box">
+        <h3>¿Tienes una gran idea? Hágamosla realidad 🚀</h3>
+        <p>Actualmente abierto a puestos a tiempo completo, proyectos freelance y colaboraciones disruptivas.</p>
+        
+        <div class="social-links">
+          <!-- Modifica los atributos href con tus datos reales -->
+          <a href="mailto:tu-correo@email.com" class="social-link" title="Enviar un correo electrónico">
+            <span>✉️</span> Email
+          </a>
+          <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener noreferrer" class="social-link" title="Visitar perfil de LinkedIn">
+            <span>💼</span> LinkedIn
+          </a>
+          <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer" class="social-link" title="Ver repositorios de GitHub">
+            <span>🐙</span> GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Institucional Mínimo -->
+  <footer style="text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--muted); position: relative; z-index: 1;">
+    <p>&copy; 2026 tu.nombre. Hecho con pasión, precisión y código limpio.</p>
+  </footer>
+<script src="main.js"></script>
+</body>
+</html>

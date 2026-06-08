@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctores</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        html { scroll-behavior: smooth; height: 100%; }
+
+        /* CORRECCIÓN DE DISPOSICIÓN: Flexbox para fijar el footer abajo */
+        body {
+            background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.45)),
+                        url("{{ url_for('static', filename='imagen2.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header.site-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px; background: rgba(15,20,30,0.35);
+            backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+        }
+        .logo { font-size: 1.6rem; font-weight: bold; color: #fff; }
+        nav a {
+            color: rgba(255,255,255,0.85); text-decoration: none;
+            margin-left: 18px; font-size: 0.9rem;
+            transition: color 0.3s, border-bottom 0.3s; padding-bottom: 4px;
+        }
+        nav a:hover { color: #fff; border-bottom: 2px solid #fff; }
+        .header-right { display: flex; align-items: center; gap: 10px; }
+        .user-chip {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px; padding: 5px 14px 5px 8px;
+        }
+        .chip-avatar { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; }
+        .chip-name { font-size: 0.82rem; }
+        .chip-role { font-size: 0.7rem; }
+        .role-admin { color: #ffd700; } .role-user { color: #7dd3fc; }
+        .btn-logout-sm { padding: 5px 14px; border-radius: 50px; font-size: 0.78rem; font-weight: 600; cursor: pointer; background: rgba(220,50,50,0.2); color: #f87171; border: 1px solid rgba(220,50,50,0.35); transition: all 0.2s; }
+        .btn-logout-sm:hover { background: rgba(220,50,50,0.45); }
+        .btn-login-sm { padding: 5px 16px; border-radius: 50px; font-size: 0.78rem; font-weight: 600; cursor: pointer; background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s; text-decoration: none; }
+        .btn-login-sm:hover { background: rgba(255,255,255,0.25); }
+
+        .rol-banner { max-width: 1400px; margin: 90px auto 0; padding: 0 20px; width: 100%; }
+        .rol-aviso { padding: 11px 18px; border-radius: 10px; font-size: 0.85rem; margin-bottom: 12px; border: 1px solid; }
+        .aviso-readonly { background: rgba(100,150,255,0.1); border-color: rgba(100,150,255,0.3); color: #93c5fd; }
+        .aviso-admin    { background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.3); color: #ffd700; display:none; }
+
+        /* CORRECCIÓN: flex-grow hace que el main ocupe el espacio disponible restante */
+        main { flex-grow: 1; width: 95%; max-width: 1400px; margin: 10px auto 40px; padding: 10px; }
+        main h1 { text-align: center; margin-bottom: 22px; font-size: 2.4rem; font-weight: 600; text-shadow: 2px 4px 10px rgba(0,0,0,0.6); }
+        .contenedor { display: grid; grid-template-columns: 260px 1fr; gap: 20px; align-items: start; }
+        .sidebar { display: flex; flex-direction: column; gap: 16px; }
+        .caja { background: rgba(15,22,36,0.45); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 18px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+        .caja h3 { margin-bottom: 12px; font-size: 1rem; }
+        .caja input, .caja button { width: 100%; padding: 10px 12px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.15); border-radius: 7px; font-size: 13px; background: rgba(255,255,255,0.07); color: #fff; outline: none; }
+        .caja input:last-of-type { margin-bottom: 0; }
+        .caja input::placeholder { color: rgba(255,255,255,0.4); }
+        .caja button { background: #fff; color: #111622; font-weight: bold; cursor: pointer; margin-top: 8px; margin-bottom: 0; }
+        .info-lista { list-style: none; }
+        .info-lista li { padding: 5px 0; font-size: 0.88rem; color: rgba(255,255,255,0.7); }
+
+        .solo-lectura-panel { background: rgba(15,22,36,0.4); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 22px; text-align: center; color: rgba(255,255,255,0.5); }
+        .solo-lectura-panel .icono { font-size: 1.8rem; margin-bottom: 8px; }
+        .solo-lectura-panel p { font-size: 0.88rem; line-height: 1.6; }
+        .solo-lectura-panel a { color: #7dd3fc; text-decoration: underline; cursor: pointer; }
+
+        .contenido-tabla { background: rgba(15,22,36,0.45); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 18px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); overflow-x: auto; min-width: 0; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.82rem; table-layout: auto; }
+        th, td { padding: 9px 11px; border-bottom: 1px solid rgba(255,255,255,0.07); white-space: nowrap; }
+        th { background: rgba(255,255,255,0.06); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(255,255,255,0.6); }
+        tr:hover td { background: rgba(255,255,255,0.03); }
+        td:last-child, th:last-child { position: sticky; right: 0; background: rgba(15,22,36,0.95); z-index: 1; }
+
+        .btn-editar, .btn-eliminar { padding: 4px 11px; border-radius: 5px; cursor: pointer; font-size: 0.75rem; transition: background 0.2s; border: 1px solid rgba(255,255,255,0.25); white-space: nowrap; }
+        .btn-editar { background: rgba(255,255,255,0.12); color: #fff; margin-right: 4px; }
+        .btn-editar:hover { background: rgba(255,255,255,0.28); }
+        .btn-eliminar { background: rgba(220,50,50,0.25); color: #fff; border-color: rgba(220,50,50,0.4); }
+        .btn-eliminar:hover { background: rgba(220,50,50,0.55); }
+
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(6px); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-overlay.activo { display: flex; }
+        .modal { background: rgba(15,22,36,0.97); border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; padding: 28px; width: 90%; max-width: 500px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; }
+        .modal h3 { margin-bottom: 16px; font-size: 1.2rem; color: #fff; }
+        .modal input { width: 100%; padding: 10px 13px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.15); border-radius: 7px; font-size: 13px; background: rgba(255,255,255,0.07); color: #fff; outline: none; }
+        .modal input::placeholder { color: rgba(255,255,255,0.4); }
+        .modal-botones { display: flex; gap: 10px; margin-top: 6px; }
+        .modal-botones button { flex: 1; padding: 11px; border-radius: 7px; font-size: 14px; font-weight: bold; cursor: pointer; border: none; }
+        .btn-guardar { background: #fff; color: #111622; }
+        .btn-cancelar { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2) !important; }
+
+        /* CORRECCIÓN: El footer se queda al final y siempre centrado */
+        footer { width: 100%; background: rgba(10,15,26,0.6); backdrop-filter: blur(12px); color: #e5e7eb; text-align: center; padding: 25px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        @media(max-width: 1000px) { .contenedor { grid-template-columns: 1fr; } main { margin-top: 10px; } }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="logo">🩺 Doctores</div>
+        <nav>
+            <a href="{{ url_for('index.home') }}">Inicio</a>
+            <a href="{{ url_for('pacientes.ver_pacientes') }}">Pacientes</a>
+            <a href="{{ url_for('medicamentos.ver_medicamentos') }}">Medicamentos</a>
+        </nav>
+        <div class="header-right" id="headerRight"></div>
+    </header>
+
+    <div class="rol-banner">
+        <div class="rol-aviso aviso-readonly" id="avisoReadonly">🔒 Modo solo lectura.</div>
+        <div class="rol-aviso aviso-admin" id="avisoAdmin">👑 Modo administrador — puedes agregar, editar y eliminar doctores.</div>
+    </div>
+
+    <main>
+        <h1>Lista de Doctores</h1>
+        <div class="contenedor">
+            <div class="sidebar" id="sidebarContainer">
+                <div class="solo-lectura-panel">
+                    <div class="icono">👁</div>
+                    <p>Solo los administradores pueden agregar doctores.<br><br>
+                    <a href="{{ url_for('index.home') }}">Inicia sesión</a> como admin.</p>
+                </div>
+                <div class="caja">
+                    <h3>🔍 Filtrar</h3>
+                    <form id="searchDoctorForm">
+                        <input type="text" id="buscarDoctor" placeholder="Nombre o especialidad...">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
+                <div class="caja">
+                    <h3>📊 Resumen</h3>
+                    <ul class="info-lista">
+                        <li>• Especialistas activos: <strong id="numDoctores">0</strong></li>
+                        <li>• Cobertura: 24 horas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="contenido-tabla">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th><th>ID</th><th>Edad</th><th>Sexo</th>
+                            <th>Especialidad</th><th>Cédula</th><th>Teléfono</th>
+                            <th>Correo</th><th>Horario</th><th>Pacientes</th>
+                            <th id="thAccion" style="display:none;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaDoctores"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <h3>✏️ Editar Doctor</h3>
+            <form id="editDoctorForm">
+                <input type="hidden" id="editId">
+                <input type="text"   id="editNombre"       placeholder="Nombre" required>
+                <input type="text"   id="editDocId"        placeholder="ID" required>
+                <input type="number" id="editEdad"         placeholder="Edad" required>
+                <input type="text"   id="editSexo"         placeholder="Sexo" required>
+                <input type="text"   id="editEspecialidad" placeholder="Especialidad" required>
+                <input type="text"   id="editCedula"       placeholder="Cédula" required>
+                <input type="text"   id="editTelefono"     placeholder="Teléfono" required>
+                <input type="email"  id="editCorreo"       placeholder="Correo" required>
+                <input type="text"   id="editHorario"      placeholder="Horario" required>
+                <input type="text"   id="editPacientes"    placeholder="Pacientes Asignados">
+                <div class="modal-botones">
+                    <button type="submit" class="btn-guardar">Guardar</button>
+                    <button type="button" class="btn-cancelar" id="btnCancelar">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>Nombre:</strong> Kevin Raul Gonzalez Chavez &nbsp;|&nbsp; <strong>No. Control:</strong> 23308051280594</p>
+    </footer>
+
+    <script>
+    let isAdmin = false;
+
+    async function init() {
+        try {
+            const res  = await fetch('/api/auth/me', { credentials: 'include' });
+            const user = await res.json();
+            renderHeader(user);
+            if (user && user.role === 'admin') { isAdmin = true; activarModoAdmin(); }
+        } catch(e) {}
+        fetchDoctores();
+    }
+
+    function renderHeader(user) {
+        const el = document.getElementById('headerRight');
+        if (!user) {
+            el.innerHTML = `<a href="{{ url_for('index.home') }}" class="btn-login-sm">Iniciar sesión</a>`;
+        } else {
+            const ini = user.nombre.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
+            const rolClass = user.role==='admin'?'role-admin':'role-user';
+            const rolLabel = user.role==='admin'?'👑 Admin':'👤 Usuario';
+            el.innerHTML = `<div class="user-chip"><div class="chip-avatar">${ini}</div><span class="chip-name">${user.nombre}</span><span class="chip-role ${rolClass}">${rolLabel}</span></div><button class="btn-logout-sm" onclick="logout()">Salir</button>`;
+        }
+    }
+
+    async function logout() {
+        await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+        window.location.href = "{{ url_for('index.home') }}";
+    }
+
+    function activarModoAdmin() {
+        document.getElementById('avisoReadonly').style.display = 'none';
+        document.getElementById('avisoAdmin').style.display    = 'block';
+        document.getElementById('thAccion').style.display      = '';
+        const sidebar = document.getElementById('sidebarContainer');
+        sidebar.innerHTML = `
+            <div class="caja">
+                <h3>Agregar Doctor</h3>
+                <form id="addDoctorForm">
+                    <input type="text"   name="nombre"      placeholder="Nombre" required>
+                    <input type="text"   name="id"          placeholder="ID" required>
+                    <input type="number" name="edad"        placeholder="Edad" required>
+                    <input type="text"   name="sexo"        placeholder="Sexo" required>
+                    <input type="text"   name="especialidad" placeholder="Especialidad" required>
+                    <input type="text"   name="cedula"      placeholder="Cédula" required>
+                    <input type="text"   name="telefono"    placeholder="Teléfono" required>
+                    <input type="email"  name="correo"      placeholder="Correo" required>
+                    <input type="text"   name="horario"     placeholder="Horario" required>
+                    <input type="text"   name="pacientes"   placeholder="Pacientes Asignados">
+                    <button type="submit">Guardar</button>
+                </form>
+            </div>
+            <div class="caja">
+                <h3>🔍 Filtrar</h3>
+                <form id="searchDoctorForm">
+                    <input type="text" id="buscarDoctor" placeholder="Nombre o especialidad...">
+                    <button type="submit">Buscar</button>
+                </form>
+            </div>
+            <div class="caja">
+                <h3>📊 Resumen</h3>
+                <ul class="info-lista">
+                    <li>• Especialistas activos: <strong id="numDoctores">0</strong></li>
+                    <li>• Cobertura: 24 horas</li>
+                </ul>
+            </div>`;
+
+        document.getElementById('addDoctorForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(e.target).entries());
+            const res  = await fetch('/api/doctores', {
+                method: 'POST', credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            if (res.ok) { e.target.reset(); fetchDoctores(); }
+            else alert('Error al guardar doctor.');
+        });
+
+        // RE-VINCULACIÓN: Corregido bug donde buscar fallaba tras renderizar el nuevo sidebar del admin
+        document.getElementById('searchDoctorForm').addEventListener('submit', e => {
+            e.preventDefault();
+            fetchDoctores(document.getElementById('buscarDoctor').value);
+        });
+    }
+
+    async function fetchDoctores(query = '') {
+        try {
+            const url = query ? `/api/doctores/search?q=${encodeURIComponent(query)}` : '/api/doctores';
+            const res = await fetch(url, { credentials: 'include' });
+            const doctores = await res.json();
+            const tbody    = document.getElementById('tablaDoctores');
+            const numEl    = document.getElementById('numDoctores');
+            if (numEl) numEl.textContent = doctores.length;
+            tbody.innerHTML = '';
+            const safe = v => String(v||'').replace(/'/g,"\\'");
+            doctores.forEach(d => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${d.nombre}</td><td>${d.id}</td><td>${d.edad}</td><td>${d.sexo}</td>
+                    <td>${d.especialidad}</td><td>${d.cedula}</td><td>${d.telefono}</td>
+                    <td>${d.correo}</td><td>${d.horario}</td><td>${d.pacientes||'Ninguno'}</td>
+                    ${isAdmin ? `<td>
+                        <button class="btn-editar" onclick="abrirModal('${safe(d._id)}','${safe(d.nombre)}','${safe(d.id)}','${safe(d.edad)}','${safe(d.sexo)}','${safe(d.especialidad)}','${safe(d.cedula)}','${safe(d.telefono)}','${safe(d.correo)}','${safe(d.horario)}','${safe(d.pacientes)}')">✏️</button>
+                        <button class="btn-eliminar" onclick="eliminarDoctor('${safe(d._id)}','${safe(d.nombre)}')">🗑️</button>
+                    </td>` : ''}`;
+                tbody.appendChild(fila);
+            });
+        } catch(e) { console.error(e); }
+    }
+
+    window.eliminarDoctor = async (id, nombre) => {
+        if (!confirm(`¿Eliminar al Dr. ${nombre}?`)) return;
+        const res = await fetch(`/api/doctores/${id}`, { method: 'DELETE', credentials: 'include' });
+        if (res.ok || res.status === 204) fetchDoctores();
+        else alert('Error al eliminar.');
+    };
+
+    window.abrirModal = (id, nombre, docId, edad, sexo, especialidad, cedula, telefono, correo, horario, pacientes) => {
+        document.getElementById('editId').value           = id;
+        document.getElementById('editNombre').value       = nombre;
+        document.getElementById('editDocId').value        = docId;
+        document.getElementById('editEdad').value         = edad;
+        document.getElementById('editSexo').value         = sexo;
+        document.getElementById('editEspecialidad').value = especialidad;
+        document.getElementById('editCedula').value       = cedula;
+        document.getElementById('editTelefono').value     = telefono;
+        document.getElementById('editCorreo').value       = correo;
+        document.getElementById('editHorario').value      = horario;
+        document.getElementById('editPacientes').value    = pacientes;
+        document.getElementById('modalOverlay').classList.add('activo');
+    };
+
+    document.getElementById('btnCancelar').addEventListener('click', () =>
+        document.getElementById('modalOverlay').classList.remove('activo'));
+    document.getElementById('modalOverlay').addEventListener('click', e => {
+        if (e.target === document.getElementById('modalOverlay'))
+            document.getElementById('modalOverlay').classList.remove('activo');
+    });
+
+    document.getElementById('editDoctorForm').addEventListener('submit', async e => {
+        e.preventDefault();
+        const id   = document.getElementById('editId').value;
+        const data = {
+            nombre: document.getElementById('editNombre').value,
+            id:     document.getElementById('editDocId').value,
+            edad:   document.getElementById('editEdad').value,
+            sexo:   document.getElementById('editSexo').value,
+            especialidad: document.getElementById('editEspecialidad').value,
+            cedula:   document.getElementById('editCedula').value,
+            telefono: document.getElementById('editTelefono').value,
+            correo:   document.getElementById('editCorreo').value,
+            horario:  document.getElementById('editHorario').value,
+            pacientes: document.getElementById('editPacientes').value,
+        };
+        const res = await fetch(`/api/doctores/${id}`, {
+            method: 'PUT', credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) { document.getElementById('modalOverlay').classList.remove('activo'); fetchDoctores(); }
+        else alert('Error al actualizar.');
+    });
+
+    document.getElementById('searchDoctorForm')?.addEventListener('submit', e => {
+        e.preventDefault();
+        fetchDoctores(document.getElementById('buscarDoctor').value);
+    });
+
+    init();
+    </script>
+</body>
+</html>/*dsd*/

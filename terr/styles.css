@@ -1,0 +1,13 @@
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: #0e0f12; /* night sky */
+  color: #eaeaea;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+#game {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}

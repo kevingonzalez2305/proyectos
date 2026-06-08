@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BD HOSPITAL</title>
+
+<style>
+
+/* =========================
+   GENERAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    color:#222;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    background:#2563eb;
+    color:white;
+    padding:30px;
+    text-align:center;
+}
+
+header h1{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+header p{
+    font-size:18px;
+}
+
+/* =========================
+   NAV
+========================= */
+
+nav{
+    background:#111827;
+    padding:18px;
+}
+
+nav ul{
+    display:flex;
+    justify-content:center;
+    list-style:none;
+    gap:25px;
+}
+
+nav a{
+    text-decoration:none;
+    color:white;
+    background:#2563eb;
+    padding:12px 20px;
+    border-radius:8px;
+    transition:.3s;
+    font-weight:bold;
+}
+
+nav a:hover{
+    background:#1d4ed8;
+    transform:scale(1.05);
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+    padding:40px;
+}
+
+/* CONTENEDOR PRINCIPAL */
+
+.contenedor{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+}
+
+/* ARTICULO */
+
+.articulo{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.articulo h2{
+    color:#2563eb;
+    margin-bottom:20px;
+    font-size:30px;
+}
+
+.articulo p{
+    line-height:1.8;
+    margin-bottom:15px;
+    font-size:17px;
+}
+
+/* IMAGEN */
+
+.imagen{
+    width:100%;
+    height:300px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.imagen img{
+    width:300px;
+    height:auto;
+    object-fit:contain;
+}
+/* FRASE */
+
+.frase{
+    background:#eff6ff;
+    border-left:6px solid #2563eb;
+    padding:18px;
+    margin-top:20px;
+    border-radius:10px;
+    font-style:italic;
+    font-size:18px;
+}
+
+/* TARJETAS */
+
+.tarjetas{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-top:35px;
+}
+
+.card{
+    background:#2563eb;
+    color:white;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    transition:.3s;
+    box-shadow:0 5px 12px rgba(0,0,0,.15);
+}
+
+.card:hover{
+    transform:translateY(-6px) scale(1.02);
+}
+
+.card h3{
+    margin:15px 0;
+    font-size:22px;
+}
+
+.card p{
+    font-size:15px;
+    line-height:1.6;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    background:#facc15;
+    padding:25px;
+    border-radius:15px;
+    height:fit-content;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.sidebar h3{
+    margin-bottom:20px;
+    color:#111827;
+    font-size:24px;
+    text-align:center;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    background:white;
+    margin-bottom:15px;
+    padding:15px;
+    border-radius:10px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.sidebar li:hover{
+    transform:translateX(5px);
+}
+
+/* INFO EXTRA */
+
+.info{
+    margin-top:25px;
+    background:white;
+    padding:18px;
+    border-radius:10px;
+    line-height:1.7;
+    font-size:15px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:35px;
+    margin-top:40px;
+}
+
+footer h3{
+    color:#60a5fa;
+    margin-bottom:15px;
+    font-size:24px;
+}
+
+footer p{
+    margin:8px 0;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    .contenedor{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    nav ul{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    header h1{
+        font-size:30px;
+    }
+
+    .articulo h2{
+        font-size:24px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <h1>🩺 BD HOSPITAL</h1>
+
+    <p>Plataforma Digital para la Gestión Médica y Atención de Pacientes</p>
+
+</header>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav>
+
+    <ul>
+
+        <li><a href="Inicio.html">Inicio</a></li>
+
+        <li><a href="pacientes.html">Pacientes</a></li>
+
+        <li><a href="doctores.html">Doctores</a></li>
+
+        <li><a href="medicamentos.html">Medicamentos</a></li>
+
+    </ul>
+
+</nav>
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main>
+
+    <div class="contenedor">
+
+        <!-- CONTENIDO -->
+
+        <section class="articulo">
+
+            <!-- IMAGEN -->
+            <div class="imagen">
+               <img src="imagen.jpg" alt="Hospital" width="300">
+
+            </div>
+
+            <h2>Bienvenido al Sistema Médico</h2>
+
+            <p>
+                Nuestro consultorio médico está comprometido con brindar una atención profesional, segura y humana para cada paciente. 
+                Trabajamos diariamente para ofrecer diagnósticos confiables, tratamientos adecuados y seguimiento médico de calidad.
+            </p>
+
+            <p>
+                Este sistema web permite administrar pacientes, médicos y medicamentos de manera organizada y eficiente, facilitando el acceso a la información clínica y mejorando la atención médica.
+            </p>
+
+            <div class="frase">
+
+                💙 “La salud no lo es todo, pero sin salud, todo lo demás pierde importancia.”
+
+            </div>
+
+            <!-- TARJETAS -->
+
+            <div class="tarjetas">
+
+                <div class="card">
+
+                    <h3>👨‍⚕️ Pacientes</h3>
+
+                    <p>
+                        Registro completo de pacientes, diagnósticos, tratamientos y consultas médicas.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>🩺 Doctores</h3>
+
+                    <p>
+                        Información de especialistas, horarios de atención y asignación de pacientes.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>💊 Medicamentos</h3>
+
+                    <p>
+                        Administración y control de medicamentos recetados y tratamientos clínicos.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <h3>📋 Panel Médico</h3>
+
+            <ul>
+
+                <li>✔ Pacientes registrados</li>
+
+                <li>✔ Consultas médicas</li>
+
+                <li>✔ Horarios disponibles</li>
+
+                <li>✔ Tratamientos clínicos</li>
+
+                <li>✔ Expedientes digitales</li>
+
+            </ul>
+
+            <div class="info">
+
+                <strong>Horario de Atención:</strong><br><br>
+
+                🕒 Lunes a Viernes<br>
+                8:00 AM - 6:00 PM<br><br>
+
+                ☎ Teléfono:<br>
+                (656) 769-7333<br><br>
+
+                📍 Ciudad Juárez, Chihuahua
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</main>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <h3>Datos del Alumno</h3>
+
+    <p><strong>Nombre:</strong> Kevin Raul Gonzalez Chavez</p>
+
+    <p><strong>No. Control:</strong> 23308051280594</p>
+
+    <p><strong>Grupo:</strong> 4-I</p>
+
+    <p><strong>Especialidad:</strong> Programación</p>
+
+</footer>
+
+</body>
+</html>

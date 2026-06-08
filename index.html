@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBTIS 128 — Centro de Bachillerato Tecnológico Industrial y de Servicios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1F3A;
+    --navy-mid: #14325E;
+    --gold: #C8991A;
+    --gold-light: #F5C842;
+    --gold-pale: #FDF3D0;
+    --cream: #F8F5EE;
+    --text: #1A1A1A;
+    --text-muted: #5A5A5A;
+    --border: #DDD9CF;
+    --white: #FFFFFF;
+    --success: #1B6B3A;
+    --red: #8B1A1A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--navy);
+    border-bottom: 3px solid var(--gold);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 68px;
+  }
+
+  .nav-brand {
+    display: flex; align-items: center; gap: 14px;
+    text-decoration: none;
+  }
+
+  .nav-emblem {
+    width: 42px; height: 42px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600; font-size: 13px;
+    color: var(--navy);
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+  }
+
+  .nav-title {
+    color: var(--white);
+    font-size: 14px; font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .nav-title span {
+    display: block;
+    color: var(--gold-light);
+    font-size: 11px; font-weight: 300;
+    letter-spacing: 0.08em;
+  }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 0;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 13px; font-weight: 400;
+    padding: 0 1rem;
+    height: 68px;
+    display: flex; align-items: center;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -3px;
+    transition: color 0.2s, border-color 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links a:hover {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold-light);
+  }
+
+  .lang-btn {
+    background: rgba(200,153,26,0.2);
+    color: var(--gold-light) !important;
+    border: 1px solid rgba(200,153,26,0.4);
+    border-radius: 4px;
+    padding: 6px 14px !important;
+    height: auto !important;
+    margin-left: 1rem;
+    font-size: 12px !important;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: background 0.2s !important;
+  }
+
+  .lang-btn:hover { background: rgba(200,153,26,0.35) !important; }
+
+  /* ── HERO ── */
+  #inicio {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 2.5rem 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(200,153,26,0.04) 0px, rgba(200,153,26,0.04) 1px, transparent 1px, transparent 60px),
+      repeating-linear-gradient(0deg, rgba(200,153,26,0.04) 0px, rgba(200,153,26,0.04) 1px, transparent 1px, transparent 60px);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto; width: 100%;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(200,153,26,0.15);
+    border: 1px solid rgba(200,153,26,0.3);
+    color: var(--gold-light);
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 3px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  h1 {
+    font-family: 'Source Serif 4', serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    color: var(--white);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 strong {
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+
+  .hero-desc {
+    color: rgba(255,255,255,0.65);
+    font-size: 16px; font-weight: 300;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+
+  .hero-actions {
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 12px 28px;
+    border: none; border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    padding: 12px 28px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 400;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .stat-item {
+    background: rgba(255,255,255,0.04);
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Source Serif 4', serif;
+    font-size: 2.8rem; font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 12px; font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  section { padding: 80px 2.5rem; }
+
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-header { margin-bottom: 3rem; }
+
+  .section-tag {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400;
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 15px; font-weight: 300;
+    max-width: 560px;
+  }
+
+  .divider {
+    width: 48px; height: 3px;
+    background: var(--gold);
+    margin-top: 1.25rem;
+    border-radius: 2px;
+  }
+
+  /* ── NOTICIAS ── */
+  #noticias { background: var(--white); }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+
+  .news-featured {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--cream);
+  }
+
+  .news-featured-img {
+    height: 240px;
+    background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy) 100%);
+    display: flex; align-items: flex-end;
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .news-featured-img::after {
+    content: '📢';
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    font-size: 3rem; opacity: 0.3;
+  }
+
+  .news-date {
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 11px; font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .news-featured-body { padding: 1.5rem; }
+
+  .news-featured-body h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.35rem; font-weight: 400;
+    color: var(--navy); margin-bottom: 0.75rem;
+  }
+
+  .news-featured-body p { font-size: 14px; color: var(--text-muted); }
+
+  .news-list { display: flex; flex-direction: column; gap: 0; }
+
+  .news-item {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+
+  .news-item:last-child { border-bottom: none; }
+
+  .news-item-tag {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .news-item h4 {
+    font-size: 14px; font-weight: 500;
+    color: var(--navy); line-height: 1.4;
+    margin-bottom: 4px;
+  }
+
+  .news-item span {
+    font-size: 12px; color: var(--text-muted); font-weight: 300;
+  }
+
+  /* ── CARRERAS ── */
+  #carreras { background: var(--cream); }
+
+  .carreras-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .carrera-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.75rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .carrera-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+  }
+
+  .carrera-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(11,31,58,0.12);
+  }
+
+  .carrera-icon {
+    width: 48px; height: 48px;
+    background: var(--gold-pale);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 1rem;
+  }
+
+  .carrera-card h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--navy); margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .carrera-card p {
+    font-size: 13px; color: var(--text-muted);
+    font-weight: 300; margin-bottom: 1.25rem;
+  }
+
+  .carrera-meta {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  .tag-navy { background: rgba(11,31,58,0.08); color: var(--navy-mid); }
+  .tag-gold { background: var(--gold-pale); color: #7A5A00; }
+
+  /* ── GALERÍA ── */
+  #galeria { background: var(--navy); }
+  #galeria h2 { color: var(--white); }
+  #galeria .section-sub { color: rgba(255,255,255,0.5); }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 200px 200px;
+    gap: 8px;
+  }
+
+  .gallery-item {
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .gallery-item:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .gallery-img {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    transition: transform 0.3s;
+    position: relative;
+  }
+
+  .gallery-item:hover .gallery-img { transform: scale(1.04); }
+
+  .gallery-img span {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+    color: var(--white);
+    font-size: 13px; font-weight: 400;
+  }
+
+  .g1 { background: linear-gradient(135deg, #1a3a5c, #0d2444); }
+  .g2 { background: linear-gradient(135deg, #2a4a1e, #1b3010); }
+  .g3 { background: linear-gradient(135deg, #3a2a0d, #251a05); }
+  .g4 { background: linear-gradient(135deg, #3a1a2a, #250d18); }
+  .g5 { background: linear-gradient(135deg, #0d2a3a, #051a25); }
+
+  /* ── CONTACTO ── */
+  #contacto { background: var(--white); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .contact-info h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.2rem; font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-list { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; }
+
+  .contact-list li {
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+
+  .contact-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: var(--gold-pale);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+
+  .contact-list strong {
+    display: block;
+    font-size: 13px; font-weight: 600;
+    color: var(--navy);
+    letter-spacing: 0.02em;
+  }
+
+  .contact-list p { font-size: 14px; color: var(--text-muted); font-weight: 300; }
+
+  .map-placeholder {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    height: 320px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1rem;
+    color: var(--text-muted);
+    font-size: 14px;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .map-placeholder::before {
+    content: '🗺️';
+    font-size: 3rem;
+    opacity: 0.4;
+  }
+
+  .map-placeholder a {
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 1px;
+  }
+
+  /* ── FORM ── */
+  .contact-form-wrap {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+  }
+
+  .contact-form-wrap h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem; font-weight: 400;
+    color: var(--navy); margin-bottom: 1.5rem;
+  }
+
+  .form-row { display: flex; gap: 1rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1rem; flex: 1; }
+
+  .form-group label {
+    font-size: 12px; font-weight: 600;
+    color: var(--navy); letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+  }
+
+  .form-group textarea { height: 90px; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--navy);
+    color: var(--white);
+    border: none; border-radius: 4px;
+    padding: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover { background: var(--navy-mid); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 3px solid var(--gold);
+    padding: 3rem 2.5rem 2rem;
+    color: rgba(255,255,255,0.55);
+    font-size: 13px;
+  }
+
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    gap: 2rem; margin-bottom: 2rem;
+  }
+
+  .footer-brand p {
+    font-size: 13px; font-weight: 300;
+    line-height: 1.8; margin-top: 1rem;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .footer-col h4 {
+    color: var(--gold-light);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+  .footer-col a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none; font-size: 13px;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--gold-light); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed; bottom: 2rem; right: 2rem;
+    background: var(--success);
+    color: var(--white);
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    opacity: 0; pointer-events: none;
+    transform: translateY(10px);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 999;
+  }
+
+  .toast.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+  /* ── MOBILE ── */
+  .hamburger {
+    display: none;
+    flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none; padding: 4px;
+  }
+
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--white); border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  @media (max-width: 900px) {
+    .hamburger { display: flex; }
+
+    .nav-links {
+      position: fixed; top: 68px; left: 0; right: 0;
+      background: var(--navy);
+      border-bottom: 3px solid var(--gold);
+      flex-direction: column; gap: 0;
+      display: none;
+    }
+
+    .nav-links.open { display: flex; }
+
+    .nav-links a {
+      height: auto; padding: 14px 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+      border-left: 3px solid transparent;
+      width: 100%;
+    }
+
+    .nav-links a:hover { border-left-color: var(--gold); border-bottom-color: rgba(255,255,255,0.08) !important; }
+
+    .lang-btn { margin: 1rem 2rem !important; border-radius: 4px; width: calc(100% - 4rem); justify-content: center; }
+
+    .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-stats { grid-template-columns: repeat(3, 1fr); }
+
+    .news-grid { grid-template-columns: 1fr; }
+
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, 160px);
+    }
+
+    .gallery-item:first-child { grid-column: span 2; grid-row: span 1; }
+
+    .contact-grid { grid-template-columns: 1fr; }
+
+    .footer-inner { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+
+    section { padding: 60px 1.25rem; }
+    nav { padding: 0 1.25rem; }
+  }
+
+  @media (max-width: 540px) {
+    .hero-stats { grid-template-columns: 1fr; }
+    .form-row { flex-direction: column; }
+    .carreras-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#inicio" class="nav-brand">
+    <div class="nav-emblem">CBT</div>
+    <div class="nav-title">
+      CBTIS 128
+      <span>Ciudad Juárez, Chih.</span>
+    </div>
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#inicio" data-es="Inicio" data-en="Home">Inicio</a></li>
+    <li><a href="#noticias" data-es="Noticias" data-en="News">Noticias</a></li>
+    <li><a href="#carreras" data-es="Carreras" data-en="Programs">Carreras</a></li>
+    <li><a href="#galeria" data-es="Galería" data-en="Gallery">Galería</a></li>
+    <li><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
+    <li>
+      <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN / ES</button>
+    </li>
+  </ul>
+
+  <button class="hamburger" id="hamburger" aria-label="Menú" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-pattern"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge" data-es="SEP — SEMS — DGETI" data-en="SEP — SEMS — DGETI">SEP — SEMS — DGETI</div>
+      <h1 data-es="Centro de Bachillerato<br><strong>Tecnológico Industrial</strong><br>y de Servicios No. 128" data-en="Center of Technological<br><strong>Industrial Baccalaureate</strong><br>and Services No. 128">
+        Centro de Bachillerato<br><strong>Tecnológico Industrial</strong><br>y de Servicios No. 128
+      </h1>
+      <p class="hero-desc" data-es="Formamos técnicos de nivel medio superior con competencias para el trabajo y la vida, comprometidos con el desarrollo de México." data-en="We train upper secondary level technicians with competencies for work and life, committed to Mexico's development.">
+        Formamos técnicos de nivel medio superior con competencias para el trabajo y la vida, comprometidos con el desarrollo de México.
+      </p>
+      <div class="hero-actions">
+        <a href="#carreras" class="btn-primary" data-es="Ver Oferta Educativa" data-en="View Academic Programs">Ver Oferta Educativa</a>
+        <a href="#contacto" class="btn-outline" data-es="Contáctanos" data-en="Contact Us">Contáctanos</a>
+      </div>
+    </div>
+    <div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">+30</span>
+          <span class="stat-label" data-es="Años de trayectoria" data-en="Years of excellence">Años de trayectoria</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">6</span>
+          <span class="stat-label" data-es="Carreras técnicas" data-en="Technical programs">Carreras técnicas</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">3K+</span>
+          <span class="stat-label" data-es="Estudiantes activos" data-en="Active students">Estudiantes activos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOTICIAS -->
+<section id="noticias">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-tag" data-es="Noticias y Avisos" data-en="News & Announcements">Noticias y Avisos</span>
+      <h2 data-es="Últimas Novedades" data-en="Latest Updates">Últimas Novedades</h2>
+      <p class="section-sub" data-es="Mantente informado sobre los eventos, logros y actividades de nuestra comunidad estudiantil." data-en="Stay informed about events, achievements, and activities from our student community.">
+        Mantente informado sobre los eventos, logros y actividades de nuestra comunidad estudiantil.
+      </p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="news-grid">
+      <div class="news-featured">
+        <div class="news-featured-img">
+          <span class="news-date" data-es="Mayo 2025" data-en="May 2025">Mayo 2025</span>
+        </div>
+        <div class="news-featured-body">
+          <h3 data-es="Inicio de Inscripciones para el Ciclo Escolar 2025–2026" data-en="Enrollment Open for School Year 2025–2026">
+            Inicio de Inscripciones para el Ciclo Escolar 2025–2026
+          </h3>
+          <p data-es="El proceso de inscripción y reinscripción para el nuevo ciclo escolar está abierto. Consulta los requisitos en la oficina de Control Escolar o comunícate al número oficial del plantel." data-en="The enrollment and re-enrollment process for the new school year is now open. Check requirements at the School Control Office or contact the school's official number.">
+            El proceso de inscripción y reinscripción para el nuevo ciclo escolar está abierto. Consulta los requisitos en la oficina de Control Escolar o comunícate al número oficial del plantel.
+          </p>
+        </div>
+      </div>
+
+      <div class="news-list">
+        <div class="news-item">
+          <div class="news-item-tag" data-es="Evento" data-en="Event">Evento</div>
+          <h4 data-es="Olimpiada del Conocimiento Interestatal 2025" data-en="Interstate Knowledge Olympiad 2025">Olimpiada del Conocimiento Interestatal 2025</h4>
+          <span data-es="Abril 28, 2025" data-en="April 28, 2025">Abril 28, 2025</span>
+        </div>
+        <div class="news-item">
+          <div class="news-item-tag" data-es="Aviso" data-en="Notice">Aviso</div>
+          <h4 data-es="Entrega de Credenciales — Alumnos de Nuevo Ingreso" data-en="ID Card Distribution — New Students">Entrega de Credenciales — Alumnos de Nuevo Ingreso</h4>
+          <span data-es="Abril 15, 2025" data-en="April 15, 2025">Abril 15, 2025</span>
+        </div>
+        <div class="news-item">
+          <div class="news-item-tag" data-es="Logro" data-en="Achievement">Logro</div>
+          <h4 data-es="Alumnos del CBTIS 128 ganan primer lugar en Expo-Ciencias Regional" data-en="CBTIS 128 students win first place at Regional Science Expo">Alumnos del CBTIS 128 ganan primer lugar en Expo-Ciencias Regional</h4>
+          <span data-es="Marzo 30, 2025" data-en="March 30, 2025">Marzo 30, 2025</span>
+        </div>
+        <div class="news-item">
+          <div class="news-item-tag" data-es="Aviso" data-en="Notice">Aviso</div>
+          <h4 data-es="Suspensión de actividades: Semana de Exámenes Parciales" data-en="Activity suspension: Partial Exam Week">Suspensión de actividades: Semana de Exámenes Parciales</h4>
+          <span data-es="Marzo 10, 2025" data-en="March 10, 2025">Marzo 10, 2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARRERAS -->
+<section id="carreras">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-tag" data-es="Oferta Educativa" data-en="Academic Programs">Oferta Educativa</span>
+      <h2 data-es="Carreras Técnicas" data-en="Technical Programs">Carreras Técnicas</h2>
+      <p class="section-sub" data-es="Elige la carrera que mejor se adapte a tus intereses. Todas incluyen el bachillerato y la formación técnica en 3 años." data-en="Choose the program that best fits your interests. All include high school diploma and technical training in 3 years.">
+        Elige la carrera que mejor se adapte a tus intereses. Todas incluyen el bachillerato y la formación técnica en 3 años.
+      </p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="carreras-grid">
+      <div class="carrera-card">
+        <div class="carrera-icon">💻</div>
+        <h3 data-es="Técnico en Programación" data-en="Programming Technician">Técnico en Programación</h3>
+        <p data-es="Desarrollo de software, bases de datos, lógica computacional y soluciones tecnológicas." data-en="Software development, databases, computational logic, and technological solutions.">
+          Desarrollo de software, bases de datos, lógica computacional y soluciones tecnológicas.
+        </p>
+        <div class="carrera-meta">
+          <span class="tag tag-navy" data-es="3 años" data-en="3 years">3 años</span>
+          <span class="tag tag-gold" data-es="Alta demanda" data-en="High demand">Alta demanda</span>
+        </div>
+      </div>
+
+      <div class="carrera-card">
+        <div class="carrera-icon">⚡</div>
+        <h3 data-es="Técnico en Electricidad" data-en="Electricity Technician">Técnico en Electricidad</h3>
+        <p data-es="Instalaciones eléctricas, automatización industrial, mantenimiento y control de sistemas." data-en="Electrical installations, industrial automation, maintenance, and system control.">
+          Instalaciones eléctricas, automatización industrial, mantenimiento y control de sistemas.
+        </p>
+        <div class="carrera-meta">
+          <span class="tag tag-navy" data-es="3 años" data-en="3 years">3 años</span>
+          <span class="tag tag-gold" data-es="Alta demanda" data-en="High demand">Alta demanda</span>
+        </div>
+      </div>
+
+      <div class="carrera-card">
+        <div class="carrera-icon">🔧</div>
+        <h3 data-es="Técnico en Mecatrónica" data-en="Mechatronics Technician">Técnico en Mecatrónica</h3>
+        <p data-es="Integración de mecánica, electrónica e informática para sistemas automatizados modernos." data-en="Integration of mechanics, electronics, and computing for modern automated systems.">
+          Integración de mecánica, electrónica e informática para sistemas automatizados modernos.
+        </p>
+        <div class="carrera-meta">
+          <span class="tag tag-navy" data-es="3 años" data-en="3 years">3 años</span>
+          <span class="tag tag-gold" data-es="Industria 4.0" data-en="Industry 4.0">Industria 4.0</span>
+        </div>
+      </div>
+
+      <div class="carrera-card">
+        <div class="carrera-icon">🏗️</div>
+        <h3 data-es="Técnico en Construcción" data-en="Construction Technician">Técnico en Construcción</h3>
+        <p data-es="Diseño arquitectónico, estructuras, topografía y gestión de proyectos de obra civil." data-en="Architectural design, structures, topography, and civil works project management.">
+          Diseño arquitectónico, estructuras, topografía y gestión de proyectos de obra civil.
+        </p>
+        <div class="carrera-meta">
+          <span class="tag tag-navy" data-es="3 años" data-en="3 years">3 años</span>
+          <span class="tag tag-gold" data-es="Infraestructura" data-en="Infrastructure">Infraestructura</span>
+        </div>
+      </div>
+
+      <div class="carrera-card">
+        <div class="carrera-icon">💊</div>
+        <h3 data-es="Técnico en Enfermería General" data-en="General Nursing Technician">Técnico en Enfermería General</h3>
+        <p data-es="Atención al paciente, primeros auxilios, salud comunitaria y cuidados de enfermería." data-en="Patient care, first aid, community health, and nursing care fundamentals.">
+          Atención al paciente, primeros auxilios, salud comunitaria y cuidados de enfermería.
+        </p>
+        <div class="carrera-meta">
+          <span class="tag tag-navy" data-es="3 años" data-en="3 years">3 años</span>
+          <span class="tag tag-gold" data-es="Sector salud" data-en="Health sector">Sector salud</span>
+        </div>
+      </div>
+
+      <div class="carrera-card">
+        <div class="carrera-icon">📊</div>
+        <h3 data-es="Técnico en Contabilidad" data-en="Accounting Technician">Técnico en Contabilidad</h3>
+        <p data-es="Registro contable, declaraciones fiscales, nóminas y administración financiera empresarial." data-en="Accounting records, tax filings, payroll, and business financial administration.">
+          Registro contable, declaraciones fiscales, nóminas y administración financiera empresarial.
+        </p>
+        <div class="carrera-meta">
+          <span class="tag tag-navy" data-es="3 años" data-en="3 years">3 años</span>
+          <span class="tag tag-gold" data-es="Sector empresarial" data-en="Business sector">Sector empresarial</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-tag" data-es="Vida Escolar" data-en="School Life">Vida Escolar</span>
+      <h2 data-es="Galería del Plantel" data-en="Campus Gallery">Galería del Plantel</h2>
+      <p class="section-sub" data-es="Conoce nuestras instalaciones, actividades y momentos que hacen especial a nuestra comunidad." data-en="Discover our facilities, activities, and moments that make our community special.">
+        Conoce nuestras instalaciones, actividades y momentos que hacen especial a nuestra comunidad.
+      </p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-img g1">
+          🏫
+          <span data-es="Instalaciones del Plantel" data-en="Campus Facilities">Instalaciones del Plantel</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-img g2">
+          🔬
+          <span data-es="Laboratorios" data-en="Laboratories">Laboratorios</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-img g3">
+          🎓
+          <span data-es="Graduación" data-en="Graduation">Graduación</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-img g4">
+          🏆
+          <span data-es="Competencias" data-en="Competitions">Competencias</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-img g5">
+          ⚽
+          <span data-es="Deporte y Cultura" data-en="Sports & Culture">Deporte y Cultura</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align:center; margin-top: 1.5rem; color: rgba(255,255,255,0.4); font-size:13px;" data-es="Reemplaza estas imágenes con fotos reales del plantel en el código HTML." data-en="Replace these placeholders with real campus photos in the HTML code.">
+      Reemplaza estas imágenes con fotos reales del plantel en el código HTML.
+    </p>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-tag" data-es="Contacto y Ubicación" data-en="Contact & Location">Contacto y Ubicación</span>
+      <h2 data-es="Encuéntranos" data-en="Find Us">Encuéntranos</h2>
+      <p class="section-sub" data-es="Estamos aquí para resolver tus dudas. Visítanos o contáctanos por cualquiera de nuestros medios." data-en="We are here to answer your questions. Visit us or contact us through any of our channels.">
+        Estamos aquí para resolver tus dudas. Visítanos o contáctanos por cualquiera de nuestros medios.
+      </p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="contact-grid">
+      <div>
+        <div class="contact-info">
+          <h3 data-es="Información de Contacto" data-en="Contact Information">Información de Contacto</h3>
+          <ul class="contact-list">
+            <li>
+              <div class="contact-icon">📍</div>
+              <div>
+                <strong data-es="Dirección" data-en="Address">Dirección</strong>
+                <p data-es="Blvd. Independencia Norte S/N,<br>Ciudad Juárez, Chihuahua, C.P. 32310" data-en="Blvd. Independencia Norte S/N,<br>Ciudad Juárez, Chihuahua, ZIP 32310">
+                  Blvd. Independencia Norte S/N,<br>Ciudad Juárez, Chihuahua, C.P. 32310
+                </p>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon">📞</div>
+              <div>
+                <strong data-es="Teléfono" data-en="Phone">Teléfono</strong>
+                <p>(656) 617-0000 ext. 128</p>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon">✉️</div>
+              <div>
+                <strong data-es="Correo Electrónico" data-en="Email">Correo Electrónico</strong>
+                <p>cbtis128@sems.gob.mx</p>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon">🕐</div>
+              <div>
+                <strong data-es="Horario de Atención" data-en="Office Hours">Horario de Atención</strong>
+                <p data-es="Lunes a Viernes: 8:00 AM – 3:00 PM" data-en="Monday to Friday: 8:00 AM – 3:00 PM">
+                  Lunes a Viernes: 8:00 AM – 3:00 PM
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="map-placeholder" style="margin-top: 1.5rem;">
+          <p data-es="Mapa de ubicación — para activarlo, inserta aquí un iframe de Google Maps con la dirección del plantel." data-en="Location map — to activate, insert a Google Maps iframe here with the school's address.">
+            Mapa de ubicación — inserta aquí un iframe de Google Maps.
+          </p>
+          <a href="https://maps.google.com/?q=CBTIS+128+Ciudad+Juarez" target="_blank" data-es="Ver en Google Maps →" data-en="View on Google Maps →">Ver en Google Maps →</a>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <h3 data-es="Envíanos un Mensaje" data-en="Send Us a Message">Envíanos un Mensaje</h3>
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label data-es="Nombre" data-en="Name">Nombre</label>
+              <input type="text" id="nombre" required placeholder="Tu nombre completo">
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-es="Correo Electrónico" data-en="Email">Correo Electrónico</label>
+            <input type="email" id="email" required placeholder="correo@ejemplo.com">
+          </div>
+          <div class="form-group">
+            <label data-es="Asunto" data-en="Subject">Asunto</label>
+            <select id="asunto">
+              <option data-es="Información sobre inscripciones" data-en="Enrollment information">Información sobre inscripciones</option>
+              <option data-es="Oferta educativa" data-en="Academic programs">Oferta educativa</option>
+              <option data-es="Servicios escolares" data-en="School services">Servicios escolares</option>
+              <option data-es="Otro" data-en="Other">Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-es="Mensaje" data-en="Message">Mensaje</label>
+            <textarea id="mensaje" required placeholder="Escribe tu mensaje aquí..."></textarea>
+          </div>
+          <button type="submit" class="form-submit" data-es="Enviar Mensaje" data-en="Send Message">Enviar Mensaje</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="nav-emblem">CBT</div>
+        <div class="nav-title">CBTIS 128<span>Ciudad Juárez, Chihuahua</span></div>
+      </div>
+      <p data-es="Institución educativa perteneciente a la Dirección General de Educación Tecnológica Industrial (DGETI), parte del Sistema Educativo Nacional." data-en="Educational institution belonging to the General Directorate of Industrial Technological Education (DGETI), part of the National Educational System.">
+        Institución educativa perteneciente a la Dirección General de Educación Tecnológica Industrial (DGETI), parte del Sistema Educativo Nacional.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4 data-es="Secciones" data-en="Sections">Secciones</h4>
+      <ul>
+        <li><a href="#inicio" data-es="Inicio" data-en="Home">Inicio</a></li>
+        <li><a href="#noticias" data-es="Noticias" data-en="News">Noticias</a></li>
+        <li><a href="#carreras" data-es="Carreras" data-en="Programs">Carreras</a></li>
+        <li><a href="#galeria" data-es="Galería" data-en="Gallery">Galería</a></li>
+        <li><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4 data-es="Dependencias" data-en="Affiliates">Dependencias</h4>
+      <ul>
+        <li><a href="https://www.gob.mx/sep" target="_blank">SEP</a></li>
+        <li><a href="https://www.sems.gob.mx" target="_blank">SEMS</a></li>
+        <li><a href="https://www.dgeti.sep.gob.mx" target="_blank">DGETI</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span data-es="© 2025 CBTIS No. 128 — Todos los derechos reservados" data-en="© 2025 CBTIS No. 128 — All rights reserved">
+      © 2025 CBTIS No. 128 — Todos los derechos reservados
+    </span>
+    <span data-es="Ciudad Juárez, Chihuahua, México" data-en="Ciudad Juárez, Chihuahua, Mexico">Ciudad Juárez, Chihuahua, México</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">✓ Mensaje enviado correctamente</div>
+
+<script>
+  // ── LANG ──
+  let lang = 'es';
+
+  function toggleLang() {
+    lang = lang === 'es' ? 'en' : 'es';
+    document.getElementById('langBtn').textContent = lang === 'es' ? 'EN / ES' : 'ES / EN';
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-es]').forEach(el => {
+      const val = lang === 'es' ? el.dataset.es : el.dataset.en;
+      if (!val) return;
+      if (el.tagName === 'INPUT' && el.type !== 'submit') {
+        // skip inputs
+      } else if (el.innerHTML !== undefined && val.includes('<')) {
+        el.innerHTML = val;
+      } else {
+        el.textContent = val;
+      }
+    });
+
+    // toast
+    const t = document.getElementById('toast');
+    t.textContent = lang === 'es' ? '✓ Mensaje enviado correctamente' : '✓ Message sent successfully';
+  }
+
+  // ── MENU MOBILE ──
+  function toggleMenu() {
+    const nl = document.getElementById('navLinks');
+    nl.classList.toggle('open');
+  }
+
+  // close menu on nav link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // ── FORM ──
+  function handleSubmit(e) {
+    e.preventDefault();
+    const t = document.getElementById('toast');
+    t.textContent = lang === 'es' ? '✓ Mensaje enviado correctamente' : '✓ Message sent successfully';
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+    e.target.reset();
+  }
+
+  // ── ACTIVE NAV ──
+  const sections = document.querySelectorAll('section[id], div[id="inicio"]');
+  const links = document.querySelectorAll('.nav-links a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.style.borderBottomColor = '');
+        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (active) {
+          active.style.color = 'rgba(245,200,66,1)';
+          active.style.borderBottomColor = 'rgba(245,200,66,1)';
+        }
+        links.forEach(l => {
+          if (l !== active) {
+            l.style.color = '';
+            l.style.borderBottomColor = '';
+          }
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

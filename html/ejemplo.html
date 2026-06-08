@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Base de Datos</title>
+</head>
+
+<body style="font-family: Arial; background-color: #eef2f3;">
+
+<h1 style="text-align:center; color:#2c3e50;">Sistema de Base de Datos</h1>
+
+<!-- FORMULARIO -->
+<div style="width: 60%; margin: auto; background: white; padding: 15px; border-radius: 10px;">
+    
+    <h3 style="color:#34495e;">Agregar Registro</h3>
+
+    <input type="text" id="nombre" placeholder="Nombre" style="width: 30%; padding:5px;">
+    <input type="number" id="edad" placeholder="Edad" style="width: 20%; padding:5px;">
+    <input type="email" id="correo" placeholder="Correo" style="width: 40%; padding:5px;">
+    
+    <br><br>
+
+    <button onclick="agregar()" 
+    style="background:#3498db; color:white; border:none; padding:8px; cursor:pointer;">
+        Agregar
+    </button>
+
+</div>
+
+<br>
+
+<!-- TABLA -->
+<table border="1" align="center" 
+style="border-collapse: collapse; width: 60%; background:white;">
+
+    <thead>
+        <tr style="background:#2c3e50; color:white;">
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Correo</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+
+    <tbody id="tabla">
+    </tbody>
+
+</table>
+
+<script>
+let id = 1;
+
+function agregar(){
+    let nombre = document.getElementById("nombre").value;
+    let edad = document.getElementById("edad").value;
+    let correo = document.getElementById("correo").value;
+
+    if(nombre === "" || edad === "" || correo === ""){
+        alert("Completa todos los campos");
+        return;
+    }
+
+    let tabla = document.getElementById("tabla");
+
+    let fila = tabla.insertRow();
+
+    fila.innerHTML = `
+        <td>${id}</td>
+        <td>${nombre}</td>
+        <td>${edad}</td>
+        <td>${correo}</td>
+        <td><button onclick="eliminar(this)" 
+        style="background:red; color:white; border:none; cursor:pointer;">Eliminar</button></td>
+    `;
+
+    id++;
+
+    document.getElementById("nombre").value = "";
+    document.getElementById("edad").value = "";
+    document.getElementById("correo").value = "";
+}
+
+function eliminar(boton){
+    let fila = boton.parentNode.parentNode;
+    fila.remove();
+}
+</script>
+
+</body>
+</html>

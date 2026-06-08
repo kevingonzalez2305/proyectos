@@ -1,0 +1,773 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{background:var(--color-background-tertiary);min-height:100vh}
+.topbar{background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:10}
+.logo{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.logo-icon{width:30px;height:30px;background:#E6F1FB;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#185FA5;font-size:15px}
+.topbar-r{display:flex;align-items:center;gap:10px}
+.badge-ok{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--color-background-success);color:var(--color-text-success)}
+.av{width:26px;height:26px;border-radius:50%;background:#E6F1FB;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:#185FA5}
+.layout{display:grid;grid-template-columns:188px 1fr}
+.sidebar{background:var(--color-background-primary);border-right:0.5px solid var(--color-border-tertiary);padding:16px 0;min-height:calc(100vh - 52px)}
+.nl{font-size:10px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.07em;padding:0 14px 6px;text-transform:uppercase}
+.ni{display:flex;align-items:center;gap:9px;padding:7px 14px;font-size:12px;color:var(--color-text-secondary);cursor:pointer}
+.ni:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
+.ni.active{background:#E6F1FB;color:#185FA5;font-weight:500}
+.ni i{font-size:15px}
+.nsec{margin-bottom:20px}
+.main{padding:20px;display:flex;flex-direction:column;gap:16px}
+.page-head{display:flex;align-items:flex-start;justify-content:space-between}
+.page-title{font-size:17px;font-weight:500;color:var(--color-text-primary)}
+.page-sub{font-size:12px;color:var(--color-text-secondary);margin-top:2px}
+.hbtns{display:flex;gap:8px}
+.btn{padding:6px 12px;border-radius:var(--border-radius-md);font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary)}
+.btn:hover{background:var(--color-background-secondary)}
+.btn:active{transform:scale(.98)}
+.btn-p{background:#185FA5;color:#fff;border-color:#185FA5}
+.btn-p:hover{background:#0C447C;color:#fff}
+.btn-danger{background:var(--color-background-danger);color:var(--color-text-danger);border-color:var(--color-border-danger)}
+.btn-danger:hover{background:#F7C1C1}
+.btn-success{background:var(--color-background-success);color:var(--color-text-success);border-color:var(--color-border-success)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.kpi{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px}
+.kpi-lbl{font-size:11px;color:var(--color-text-secondary);margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.kpi-val{font-size:24px;font-weight:500;color:var(--color-text-primary);line-height:1}
+.kpi-d{font-size:11px;margin-top:5px}
+.du{color:var(--color-text-success)}.dd{color:var(--color-text-danger)}
+.grid2{display:grid;grid-template-columns:1fr 300px;gap:14px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.ch{padding:12px 14px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between}
+.ct{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.srow{padding:10px 14px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;gap:6px}
+.srow input,.srow select{font-size:12px}
+.srow input{flex:1}
+.srow select{width:120px}
+.tbl{width:100%;border-collapse:collapse;table-layout:fixed}
+.tbl th{font-size:10px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;padding:8px 14px;text-align:left;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary)}
+.tbl td{font-size:12px;padding:9px 14px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--color-background-secondary)}
+.pill{display:inline-flex;align-items:center;font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500}
+.ps{background:var(--color-background-success);color:var(--color-text-success)}
+.pw{background:var(--color-background-warning);color:var(--color-text-warning)}
+.pd{background:var(--color-background-danger);color:var(--color-text-danger)}
+.pi{background:#E6F1FB;color:#185FA5}
+.pg{background:var(--color-background-secondary);color:var(--color-text-secondary)}
+.pp{background:#EEEDFE;color:#534AB7}
+.ract{color:var(--color-text-info);cursor:pointer;font-size:14px;padding:2px 3px;border-radius:4px}
+.ract:hover{background:#E6F1FB}
+.pav{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;vertical-align:middle;margin-right:6px}
+.celln{display:flex;align-items:center}
+.pg-bar{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-top:0.5px solid var(--color-border-tertiary)}
+.pg-info{font-size:11px;color:var(--color-text-secondary)}
+.pg-btns{display:flex;gap:3px}
+.pgb{width:26px;height:26px;border-radius:6px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;font-size:11px;color:var(--color-text-secondary);display:flex;align-items:center;justify-content:center}
+.pgb.on{background:#185FA5;color:#fff;border-color:#185FA5}
+.pgb:hover:not(.on){background:var(--color-background-secondary)}
+.side-stack{display:flex;flex-direction:column;gap:12px}
+.ai{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.ai:last-child{border-bottom:none}
+.at{font-size:12px;color:var(--color-text-secondary);min-width:40px}
+.an{font-size:12px;color:var(--color-text-primary);font-weight:500}
+.ad{font-size:11px;color:var(--color-text-secondary)}
+.adot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dg{background:#639922}.da{background:#BA7517}.db{background:#185FA5}.dr{background:#A32D2D}
+.ali{display:flex;align-items:flex-start;gap:9px;padding:10px 14px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.ali:last-child{border-bottom:none}
+.ali-icon{font-size:15px;margin-top:1px}
+.ali-text{font-size:12px;color:var(--color-text-primary);line-height:1.35}
+.ali-time{font-size:10px;color:var(--color-text-tertiary);margin-top:2px}
+.modal-bg{background:rgba(0,0,0,0.38);display:flex;align-items:center;justify-content:center;padding:20px;min-height:400px}
+.modal{background:var(--color-background-primary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);width:100%;max-width:460px;overflow:hidden}
+.mh{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.mt{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.mc{padding:16px}
+.mf{display:flex;flex-direction:column;gap:10px}
+.fg{display:flex;flex-direction:column;gap:4px}
+.fl{font-size:11px;color:var(--color-text-secondary)}
+.fg input,.fg select,.fg textarea{font-size:12px;width:100%}
+.fg textarea{height:60px;resize:vertical}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mfoot{padding:12px 16px;border-top:0.5px solid var(--color-border-tertiary);display:flex;justify-content:flex-end;gap:8px}
+.view-card{padding:0}
+.vc-head{padding:14px 16px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:12px}
+.vc-av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500}
+.vc-body{padding:14px 16px}
+.vrow{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.vrow:last-child{border-bottom:none}
+.vl{font-size:11px;color:var(--color-text-secondary)}
+.vv{font-size:12px;color:var(--color-text-primary)}
+.toast{position:absolute;bottom:16px;right:16px;background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:10px 14px;font-size:12px;color:var(--color-text-primary);display:flex;align-items:center;gap:8px;box-shadow:none;z-index:20;opacity:0;transition:opacity .3s}
+.toast.show{opacity:1}
+.ts-ok{color:var(--color-text-success)}
+.ts-err{color:var(--color-text-danger)}
+.tab-bar{display:flex;gap:2px;padding:10px 14px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.tab{padding:5px 12px;border-radius:var(--border-radius-md);font-size:12px;cursor:pointer;color:var(--color-text-secondary);border:0.5px solid transparent}
+.tab.on{background:#E6F1FB;color:#185FA5;border-color:#B5D4F4;font-weight:500}
+.tab:hover:not(.on){background:var(--color-background-secondary)}
+.section{display:none}.section.on{display:block}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:14px}
+.stat-item{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px}
+.stat-lbl{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.stat-val{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.bar-wrap{padding:14px}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.bar-lbl{font-size:11px;color:var(--color-text-secondary);width:90px;text-align:right;flex-shrink:0}
+.bar-track{flex:1;height:8px;background:var(--color-background-secondary);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width .4s}
+.bar-num{font-size:11px;color:var(--color-text-secondary);width:28px}
+.farm-item{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.farm-item:last-child{border-bottom:none}
+.farm-name{font-size:12px;color:var(--color-text-primary)}
+.farm-det{font-size:11px;color:var(--color-text-secondary)}
+.stock-bar{height:4px;border-radius:2px;margin-top:4px}
+.empty-state{padding:32px;text-align:center;color:var(--color-text-secondary);font-size:13px}
+.empty-state i{font-size:32px;display:block;margin-bottom:8px;opacity:.4}
+</style>
+
+<div class="wrap" style="position:relative">
+<div id="toast" class="toast"><i id="toast-icon" class="ti ti-check ts-ok"></i><span id="toast-msg">Guardado</span></div>
+
+<div class="topbar">
+  <div class="logo">
+    <div class="logo-icon"><i class="ti ti-heart-rate-monitor" aria-hidden="true"></i></div>
+    Hospital Central — SIG
+  </div>
+  <div class="topbar-r">
+    <span class="badge-ok"><i class="ti ti-circle-filled" style="font-size:7px;vertical-align:1px;margin-right:3px"></i>En línea</span>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--color-text-secondary)">
+      <div class="av">DR</div>Dr. Ramírez
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+<div class="sidebar">
+  <div class="nsec">
+    <div class="nl">Principal</div>
+    <div class="ni active" onclick="goPage('dashboard',this)"><i class="ti ti-layout-dashboard"></i>Dashboard</div>
+    <div class="ni" onclick="goPage('pacientes',this)"><i class="ti ti-users"></i>Pacientes</div>
+    <div class="ni" onclick="goPage('citas',this)"><i class="ti ti-calendar"></i>Citas</div>
+    <div class="ni" onclick="goPage('medicos',this)"><i class="ti ti-stethoscope"></i>Médicos</div>
+  </div>
+  <div class="nsec">
+    <div class="nl">Clínico</div>
+    <div class="ni" onclick="goPage('historial',this)"><i class="ti ti-file-medical"></i>Historiales</div>
+    <div class="ni" onclick="goPage('farmacia',this)"><i class="ti ti-pill"></i>Farmacia</div>
+    <div class="ni" onclick="goPage('laboratorio',this)"><i class="ti ti-test-pipe"></i>Laboratorio</div>
+    <div class="ni" onclick="goPage('hospitalizacion',this)"><i class="ti ti-bed"></i>Hospitalización</div>
+  </div>
+  <div class="nsec">
+    <div class="nl">Admin</div>
+    <div class="ni" onclick="goPage('facturacion',this)"><i class="ti ti-receipt"></i>Facturación</div>
+    <div class="ni" onclick="goPage('reportes',this)"><i class="ti ti-chart-bar"></i>Reportes</div>
+  </div>
+</div>
+
+<div class="main" id="main-content"></div>
+</div>
+
+<div id="modal-area"></div>
+</div>
+
+<script>
+const PAL=[{bg:'#E6F1FB',tc:'#185FA5'},{bg:'#E1F5EE',tc:'#0F6E56'},{bg:'#EEEDFE',tc:'#534AB7'},{bg:'#FAEEDA',tc:'#854F0B'},{bg:'#FAECE7',tc:'#993C1D'}];
+function pcolor(n){const i=n.charCodeAt(0)%PAL.length;return PAL[i];}
+function ini(n){return n.split(' ').slice(0,2).map(x=>x[0]).join('');}
+function toast(msg,ok=true){
+  const t=document.getElementById('toast');
+  document.getElementById('toast-msg').textContent=msg;
+  const ic=document.getElementById('toast-icon');
+  ic.className='ti '+(ok?'ti-check ts-ok':'ti-x ts-err');
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);
+}
+function closeModal(){document.getElementById('modal-area').innerHTML='';}
+
+const DB={
+  patients:[
+    {id:'P-0023',name:'Luisa Fernández',age:54,sex:'F',blood:'A+',dept:'Cardiología',dx:'Insuficiencia cardíaca',status:'Hospitalizado',phone:'555-0101',email:'l.fernandez@email.com',date:'2025-01-12'},
+    {id:'P-0198',name:'Antonio Ruiz',age:71,sex:'M',blood:'O+',dept:'Neurología',dx:'Parkinson',status:'Activo',phone:'555-0202',email:'a.ruiz@email.com',date:'2024-09-05'},
+    {id:'P-0312',name:'María García',age:8,sex:'F',blood:'B+',dept:'Pediatría',dx:'Bronquitis',status:'Alta',phone:'555-0303',email:'garcia.familia@email.com',date:'2026-03-20'},
+    {id:'P-0445',name:'Pedro Sánchez',age:38,sex:'M',blood:'AB-',dept:'Traumatología',dx:'Fractura tibial',status:'Hospitalizado',phone:'555-0404',email:'p.sanchez@email.com',date:'2026-05-01'},
+    {id:'P-0501',name:'Isabel López',age:63,sex:'F',blood:'A-',dept:'Oncología',dx:'Ca. de mama',status:'Activo',phone:'555-0505',email:'i.lopez@email.com',date:'2024-11-18'},
+    {id:'P-0620',name:'Jorge Martín',age:29,sex:'M',blood:'O-',dept:'Urgencias',dx:'Traumatismo craneal',status:'Urgente',phone:'555-0606',email:'j.martin@email.com',date:'2026-05-24'},
+    {id:'P-0734',name:'Carmen Díaz',age:47,sex:'F',blood:'A+',dept:'Cardiología',dx:'Arritmia',status:'Activo',phone:'555-0707',email:'c.diaz@email.com',date:'2025-07-30'},
+    {id:'P-0889',name:'Roberto Jiménez',age:82,sex:'M',blood:'O+',dept:'Neurología',dx:'Ictus isquémico',status:'Hospitalizado',phone:'555-0808',email:'r.jimenez@email.com',date:'2026-04-10'},
+    {id:'P-0921',name:'Paula Torres',age:34,sex:'F',blood:'B-',dept:'Traumatología',dx:'Esguince lumbar',status:'Alta',phone:'555-0909',email:'p.torres@email.com',date:'2026-05-18'},
+    {id:'P-1045',name:'Miguel Moreno',age:56,sex:'M',blood:'AB+',dept:'Oncología',dx:'Ca. de pulmón',status:'Urgente',phone:'555-1010',email:'m.moreno@email.com',date:'2026-05-22'},
+  ],
+  citas:[
+    {id:'C-001',patient:'Luisa Fernández',doctor:'Dr. Vargas',dept:'Cardiología',date:'2026-05-24',time:'09:00',status:'Confirmada'},
+    {id:'C-002',patient:'Antonio Ruiz',doctor:'Dra. Solís',dept:'Neurología',date:'2026-05-24',time:'09:30',status:'Confirmada'},
+    {id:'C-003',patient:'María García',doctor:'Dr. Reyes',dept:'Pediatría',date:'2026-05-24',time:'10:15',status:'Pendiente'},
+    {id:'C-004',patient:'Pedro Sánchez',doctor:'Dr. Molina',dept:'Traumatología',date:'2026-05-24',time:'11:00',status:'Pendiente'},
+    {id:'C-005',patient:'Isabel López',doctor:'Dra. Castro',dept:'Oncología',date:'2026-05-24',time:'11:45',status:'Confirmada'},
+    {id:'C-006',patient:'Carmen Díaz',doctor:'Dr. Vargas',dept:'Cardiología',date:'2026-05-25',time:'08:30',status:'Pendiente'},
+    {id:'C-007',patient:'Paula Torres',doctor:'Dr. Molina',dept:'Traumatología',date:'2026-05-25',time:'14:00',status:'Cancelada'},
+  ],
+  medicos:[
+    {id:'M-001',name:'Dr. Carlos Vargas',dept:'Cardiología',esp:'Cardiología intervencionista',status:'Disponible',pacientes:14,turno:'Mañana'},
+    {id:'M-002',name:'Dra. Ana Solís',dept:'Neurología',esp:'Neurología clínica',status:'En consulta',pacientes:9,turno:'Mañana'},
+    {id:'M-003',name:'Dr. Javier Reyes',dept:'Pediatría',esp:'Neonatología',status:'Disponible',pacientes:11,turno:'Tarde'},
+    {id:'M-004',name:'Dr. Luis Molina',dept:'Traumatología',esp:'Cirugía ortopédica',status:'En cirugía',pacientes:7,turno:'Mañana'},
+    {id:'M-005',name:'Dra. Elena Castro',dept:'Oncología',esp:'Oncología médica',status:'Disponible',pacientes:16,turno:'Tarde'},
+    {id:'M-006',name:'Dr. Marcos Gil',dept:'Urgencias',esp:'Medicina de urgencias',status:'En guardia',pacientes:5,turno:'Noche'},
+  ],
+  farmacia:[
+    {id:'F-001',name:'Amoxicilina 500mg',stock:12,max:200,unit:'comprimidos',status:'Crítico'},
+    {id:'F-002',name:'Paracetamol 1g IV',stock:85,max:300,unit:'viales',status:'Normal'},
+    {id:'F-003',name:'Omeprazol 20mg',stock:34,max:150,unit:'cápsulas',status:'Bajo'},
+    {id:'F-004',name:'Heparina 5000UI',stock:120,max:200,unit:'jeringas',status:'Normal'},
+    {id:'F-005',name:'Insulina Glargina',stock:8,max:100,unit:'plumas',status:'Crítico'},
+    {id:'F-006',name:'Metformina 850mg',stock:160,max:250,unit:'comprimidos',status:'Normal'},
+    {id:'F-007',name:'Morfina 10mg/mL',stock:22,max:80,unit:'ampollas',status:'Bajo'},
+  ],
+  lab:[
+    {id:'L-001',patient:'Roberto Jiménez',test:'Hemograma completo',date:'2026-05-24',status:'Listo',result:'Anemia leve (Hb 10.2)'},
+    {id:'L-002',patient:'Luisa Fernández',test:'BNP cardíaco',date:'2026-05-24',status:'En proceso',result:'—'},
+    {id:'L-003',patient:'Miguel Moreno',test:'Marcadores tumorales',date:'2026-05-23',status:'Listo',result:'CEA elevado'},
+    {id:'L-004',patient:'Pedro Sánchez',test:'Coagulación',date:'2026-05-24',status:'Pendiente',result:'—'},
+    {id:'L-005',patient:'Carmen Díaz',test:'Electrolitos',date:'2026-05-23',status:'Listo',result:'Hipopotasemia leve'},
+    {id:'L-006',patient:'Jorge Martín',test:'TAC cerebral',date:'2026-05-24',status:'En proceso',result:'—'},
+  ],
+  camas:[
+    {id:'1A',planta:'Planta 1',dept:'Cardiología',patient:'Luisa Fernández',status:'Ocupada',desde:'12/01'},
+    {id:'1B',planta:'Planta 1',dept:'Cardiología',patient:'',status:'Libre',desde:''},
+    {id:'2A',planta:'Planta 2',dept:'Neurología',patient:'Roberto Jiménez',status:'Ocupada',desde:'10/04'},
+    {id:'2B',planta:'Planta 2',dept:'Neurología',patient:'',status:'Limpieza',desde:''},
+    {id:'3A',planta:'Planta 3',dept:'Traumatología',patient:'Pedro Sánchez',status:'Ocupada',desde:'01/05'},
+    {id:'3B',planta:'Planta 3',dept:'Traumatología',patient:'',status:'Libre',desde:''},
+    {id:'4A',planta:'Planta 4',dept:'Oncología',patient:'Miguel Moreno',status:'Ocupada',desde:'22/05'},
+    {id:'UCI-1',planta:'UCI',dept:'Urgencias',patient:'Jorge Martín',status:'Ocupada',desde:'24/05'},
+    {id:'UCI-2',planta:'UCI',dept:'Urgencias',patient:'',status:'Libre',desde:''},
+  ],
+  facturas:[
+    {id:'FAC-2024',patient:'Luisa Fernández',concepto:'Hospitalización 5 días + procedimiento',total:8400,status:'Pendiente',fecha:'2026-05-20'},
+    {id:'FAC-2025',patient:'María García',concepto:'Consulta pediátrica + medicación',total:320,status:'Pagada',fecha:'2026-05-22'},
+    {id:'FAC-2026',patient:'Paula Torres',concepto:'Consulta + pruebas de imagen',total:780,status:'Pagada',fecha:'2026-05-18'},
+    {id:'FAC-2027',patient:'Antonio Ruiz',concepto:'Consulta neurología + medicación',total:450,status:'Pendiente',fecha:'2026-05-23'},
+    {id:'FAC-2028',patient:'Jorge Martín',concepto:'Urgencias + TAC + UCI',total:12600,status:'Pendiente',fecha:'2026-05-24'},
+  ]
+};
+
+const SC={Activo:'ps',Hospitalizado:'pi',Alta:'pg',Urgente:'pd'};
+const SC2={Confirmada:'ps',Pendiente:'pw',Cancelada:'pd'};
+const SC3={Disponible:'ps','En consulta':'pi','En cirugía':'pw','En guardia':'pp'};
+const SC4={Normal:'ps',Bajo:'pw',Crítico:'pd'};
+const SC5={Listo:'ps','En proceso':'pi',Pendiente:'pw'};
+const SC6={Ocupada:'pd',Libre:'ps',Limpieza:'pw'};
+const SC7={Pagada:'ps',Pendiente:'pw'};
+
+let curPage='dashboard';
+
+function goPage(page,el){
+  curPage=page;
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  if(el)el.classList.add('active');
+  render(page);
+}
+
+function render(page){
+  const mc=document.getElementById('main-content');
+  if(page==='dashboard')mc.innerHTML=renderDashboard();
+  else if(page==='pacientes')mc.innerHTML=renderPacientes();
+  else if(page==='citas')mc.innerHTML=renderCitas();
+  else if(page==='medicos')mc.innerHTML=renderMedicos();
+  else if(page==='historial')mc.innerHTML=renderHistorial();
+  else if(page==='farmacia')mc.innerHTML=renderFarmacia();
+  else if(page==='laboratorio')mc.innerHTML=renderLab();
+  else if(page==='hospitalizacion')mc.innerHTML=renderHosp();
+  else if(page==='facturacion')mc.innerHTML=renderFacturacion();
+  else if(page==='reportes')mc.innerHTML=renderReportes();
+}
+
+function renderDashboard(){
+  const hosp=DB.patients.filter(p=>p.status==='Hospitalizado').length;
+  const urg=DB.patients.filter(p=>p.status==='Urgente').length;
+  const cPend=DB.citas.filter(c=>c.status==='Pendiente').length;
+  return `
+  <div class="page-head"><div><div class="page-title">Dashboard general</div><div class="page-sub">Domingo 24 de mayo de 2026 · Turno mañana</div></div>
+  <div class="hbtns"><button class="btn" onclick="toast('Reporte impreso','true')"><i class="ti ti-printer" style="font-size:13px"></i>Imprimir</button></div></div>
+  <div class="kpis">
+    <div class="kpi"><div class="kpi-lbl"><i class="ti ti-users" style="font-size:13px;color:#185FA5"></i>Pacientes</div><div class="kpi-val">${DB.patients.length}</div><div class="kpi-d du"><i class="ti ti-trending-up" style="font-size:11px"></i> +3 este mes</div></div>
+    <div class="kpi"><div class="kpi-lbl"><i class="ti ti-bed" style="font-size:13px;color:#3B6D11"></i>Hospitalizados</div><div class="kpi-val">${hosp}</div><div class="kpi-d du"><i class="ti ti-trending-up" style="font-size:11px"></i> +1 hoy</div></div>
+    <div class="kpi"><div class="kpi-lbl"><i class="ti ti-calendar" style="font-size:13px;color:#BA7517"></i>Citas hoy</div><div class="kpi-val">${DB.citas.filter(c=>c.date==='2026-05-24').length}</div><div class="kpi-d pg-info">${cPend} pendientes</div></div>
+    <div class="kpi"><div class="kpi-lbl"><i class="ti ti-alert-triangle" style="font-size:13px;color:#A32D2D"></i>Urgencias</div><div class="kpi-val">${urg}</div><div class="kpi-d dd"><i class="ti ti-trending-up" style="font-size:11px"></i> Atención inmediata</div></div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ch"><span class="ct">Actividad reciente</span><span class="pill pi">Hoy</span></div>
+      <div class="bar-wrap">
+        <div class="bar-lbl" style="width:100%;text-align:left;font-size:12px;color:var(--color-text-secondary);margin-bottom:10px">Pacientes por servicio</div>
+        ${['Cardiología','Neurología','Traumatología','Oncología','Pediatría','Urgencias'].map(d=>{
+          const n=DB.patients.filter(p=>p.dept===d).length;
+          const pct=Math.round(n/DB.patients.length*100);
+          return `<div class="bar-row"><div class="bar-lbl">${d}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:#378ADD"></div></div><div class="bar-num">${n}</div></div>`;
+        }).join('')}
+      </div>
+      <div style="padding:0 14px 14px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-p" onclick="goPage('pacientes',document.querySelectorAll('.ni')[1])"><i class="ti ti-users" style="font-size:12px"></i>Ver pacientes</button>
+        <button class="btn" onclick="goPage('citas',document.querySelectorAll('.ni')[2])"><i class="ti ti-calendar" style="font-size:12px"></i>Ver citas</button>
+        <button class="btn" onclick="goPage('reportes',document.querySelectorAll('.ni')[9])"><i class="ti ti-chart-bar" style="font-size:12px"></i>Ver reportes</button>
+      </div>
+    </div>
+    <div class="side-stack">
+      <div class="card"><div class="ch"><span class="ct">Citas de hoy</span></div>
+        ${DB.citas.filter(c=>c.date==='2026-05-24').map(c=>`
+        <div class="ai"><div class="adot ${c.status==='Confirmada'?'dg':c.status==='Pendiente'?'da':'dr'}"></div>
+        <div class="at">${c.time}</div><div><div class="an">${c.patient}</div><div class="ad">${c.dept}</div></div></div>`).join('')}
+      </div>
+      <div class="card"><div class="ch"><span class="ct">Alertas</span><span class="pill pd">Críticas</span></div>
+        <div class="ali"><i class="ti ti-alert-triangle ali-icon" style="color:var(--color-text-danger)"></i><div><div class="ali-text">Pot. crítico — P-2841 UCI</div><div class="ali-time">Hace 5 min</div></div></div>
+        <div class="ali"><i class="ti ti-pill ali-icon" style="color:var(--color-text-warning)"></i><div><div class="ali-text">Stock bajo: amoxicilina</div><div class="ali-time">Hace 18 min</div></div></div>
+        <div class="ali"><i class="ti ti-test-pipe ali-icon" style="color:var(--color-text-info)"></i><div><div class="ali-text">Lab listo — Pérez, Ana</div><div class="ali-time">Hace 32 min</div></div></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderPacientes(filter='',dept='',status=''){
+  let data=DB.patients.filter(p=>{
+    const q=filter.toLowerCase();
+    return(!q||p.name.toLowerCase().includes(q)||p.id.toLowerCase().includes(q)||p.dx.toLowerCase().includes(q))&&(!dept||p.dept===dept)&&(!status||p.status===status);
+  });
+  const rows=data.map(p=>{const c=pcolor(p.name);return`<tr>
+    <td style="color:var(--color-text-secondary);font-size:11px">${p.id}</td>
+    <td><div class="celln"><div class="pav" style="background:${c.bg};color:${c.tc}">${ini(p.name)}</div>${p.name}</div></td>
+    <td>${p.age}a · ${p.sex}</td><td>${p.dept}</td><td>${p.dx}</td>
+    <td><span class="pill ${SC[p.status]}">${p.status}</span></td>
+    <td style="text-align:center">
+      <span class="ract" title="Ver" onclick="viewPaciente('${p.id}')"><i class="ti ti-eye"></i></span>
+      <span class="ract" title="Editar" onclick="editPaciente('${p.id}')"><i class="ti ti-edit"></i></span>
+      <span class="ract" title="Eliminar" onclick="deletePaciente('${p.id}')"><i class="ti ti-trash"></i></span>
+    </td></tr>`;}).join('')||`<tr><td colspan="7"><div class="empty-state"><i class="ti ti-mood-empty"></i>Sin resultados</div></td></tr>`;
+  return`
+  <div class="page-head"><div><div class="page-title">Pacientes</div><div class="page-sub">${DB.patients.length} registros totales</div></div>
+  <div class="hbtns">
+    <button class="btn" onclick="exportPacientes()"><i class="ti ti-download" style="font-size:12px"></i>Exportar CSV</button>
+    <button class="btn btn-p" onclick="newPaciente()"><i class="ti ti-plus" style="font-size:12px"></i>Nuevo paciente</button>
+  </div></div>
+  <div class="card">
+    <div class="srow">
+      <input type="text" placeholder="Buscar nombre, ID, diagnóstico…" id="ps" oninput="render('pacientes');document.getElementById('ps').value=this.value" value="${filter}">
+      <select id="pd" onchange="render('pacientes')"><option value="">Todos los servicios</option>${['Cardiología','Neurología','Traumatología','Pediatría','Oncología','Urgencias'].map(d=>`<option ${d===dept?'selected':''}>${d}</option>`).join('')}</select>
+      <select id="pst" onchange="render('pacientes')"><option value="">Todos los estados</option>${['Activo','Hospitalizado','Alta','Urgente'].map(s=>`<option ${s===status?'selected':''}>${s}</option>`).join('')}</select>
+    </div>
+    <div style="overflow-x:auto"><table class="tbl"><colgroup><col style="width:60px"><col style="width:155px"><col style="width:60px"><col style="width:110px"><col style="width:125px"><col style="width:90px"><col style="width:70px"></colgroup>
+    <thead><tr><th>ID</th><th>Paciente</th><th>Edad</th><th>Servicio</th><th>Diagnóstico</th><th>Estado</th><th></th></tr></thead>
+    <tbody>${rows}</tbody></table></div>
+    <div class="pg-bar"><span class="pg-info">Mostrando ${data.length} de ${DB.patients.length}</span>
+    <div class="pg-btns"><button class="pgb on">1</button><button class="pgb">2</button><button class="pgb"><i class="ti ti-chevron-right" style="font-size:11px"></i></button></div></div>
+  </div>`;
+}
+
+function renderCitas(){
+  const rows=DB.citas.map(c=>`<tr>
+    <td style="font-size:11px;color:var(--color-text-secondary)">${c.id}</td>
+    <td>${c.patient}</td><td>${c.doctor}</td><td>${c.dept}</td>
+    <td>${c.date} ${c.time}</td>
+    <td><span class="pill ${SC2[c.status]}">${c.status}</span></td>
+    <td style="text-align:center">
+      <span class="ract" onclick="confirmCita('${c.id}')"><i class="ti ti-check"></i></span>
+      <span class="ract" onclick="cancelCita('${c.id}')"><i class="ti ti-x"></i></span>
+      <span class="ract" onclick="editCita('${c.id}')"><i class="ti ti-edit"></i></span>
+    </td></tr>`).join('');
+  return`<div class="page-head"><div><div class="page-title">Citas</div><div class="page-sub">${DB.citas.length} programadas</div></div>
+  <div class="hbtns"><button class="btn btn-p" onclick="newCita()"><i class="ti ti-plus" style="font-size:12px"></i>Nueva cita</button></div></div>
+  <div class="card">
+  <div style="overflow-x:auto"><table class="tbl"><colgroup><col style="width:60px"><col style="width:140px"><col style="width:120px"><col style="width:100px"><col style="width:110px"><col style="width:90px"><col style="width:60px"></colgroup>
+  <thead><tr><th>ID</th><th>Paciente</th><th>Médico</th><th>Servicio</th><th>Fecha/hora</th><th>Estado</th><th></th></tr></thead>
+  <tbody>${rows}</tbody></table></div></div>`;
+}
+
+function renderMedicos(){
+  const rows=DB.medicos.map(m=>{const c=pcolor(m.name);return`<tr>
+    <td style="font-size:11px;color:var(--color-text-secondary)">${m.id}</td>
+    <td><div class="celln"><div class="pav" style="background:${c.bg};color:${c.tc}">${ini(m.name)}</div>${m.name}</div></td>
+    <td>${m.dept}</td><td>${m.esp}</td>
+    <td><span class="pill ${SC3[m.status]}">${m.status}</span></td>
+    <td>${m.pacientes}</td><td>${m.turno}</td>
+    <td style="text-align:center">
+      <span class="ract" onclick="viewMedico('${m.id}')"><i class="ti ti-eye"></i></span>
+      <span class="ract" onclick="editMedico('${m.id}')"><i class="ti ti-edit"></i></span>
+    </td></tr>`;}).join('');
+  return`<div class="page-head"><div><div class="page-title">Médicos</div><div class="page-sub">${DB.medicos.length} activos</div></div>
+  <div class="hbtns"><button class="btn btn-p" onclick="newMedico()"><i class="ti ti-plus" style="font-size:12px"></i>Agregar médico</button></div></div>
+  <div class="card"><div style="overflow-x:auto"><table class="tbl">
+  <thead><tr><th>ID</th><th>Nombre</th><th>Servicio</th><th>Especialidad</th><th>Estado</th><th>Pacientes</th><th>Turno</th><th></th></tr></thead>
+  <tbody>${rows}</tbody></table></div></div>`;
+}
+
+function renderHistorial(){
+  return`<div class="page-head"><div><div class="page-title">Historiales clínicos</div><div class="page-sub">Busca un paciente para ver su historial</div></div></div>
+  <div class="card">
+    <div class="srow"><input type="text" id="hs" placeholder="Buscar paciente…"><button class="btn btn-p" onclick="buscarHistorial()"><i class="ti ti-search" style="font-size:12px"></i>Buscar</button></div>
+    <div id="hist-result">
+      <div class="empty-state"><i class="ti ti-file-medical"></i>Ingresa el nombre de un paciente para ver su historial clínico</div>
+    </div>
+  </div>`;
+}
+
+function buscarHistorial(){
+  const q=document.getElementById('hs').value.toLowerCase();
+  const p=DB.patients.find(p=>p.name.toLowerCase().includes(q)||p.id.toLowerCase().includes(q));
+  const el=document.getElementById('hist-result');
+  if(!p){el.innerHTML=`<div class="empty-state"><i class="ti ti-mood-empty"></i>Paciente no encontrado</div>`;return;}
+  const c=pcolor(p.name);
+  el.innerHTML=`
+  <div class="vc-head" style="background:var(--color-background-secondary)">
+    <div class="vc-av" style="background:${c.bg};color:${c.tc}">${ini(p.name)}</div>
+    <div><div style="font-size:13px;font-weight:500">${p.name}</div><div style="font-size:11px;color:var(--color-text-secondary)">${p.id} · ${p.dept}</div></div>
+    <span class="pill ${SC[p.status]}" style="margin-left:auto">${p.status}</span>
+  </div>
+  <div class="vc-body">
+    <div class="vrow"><span class="vl">Diagnóstico principal</span><span class="vv">${p.dx}</span></div>
+    <div class="vrow"><span class="vl">Edad / Sexo</span><span class="vv">${p.age} años · ${p.sex==='F'?'Femenino':'Masculino'}</span></div>
+    <div class="vrow"><span class="vl">Grupo sanguíneo</span><span class="vv">${p.blood}</span></div>
+    <div class="vrow"><span class="vl">Teléfono</span><span class="vv">${p.phone}</span></div>
+    <div class="vrow"><span class="vl">Email</span><span class="vv">${p.email}</span></div>
+    <div class="vrow"><span class="vl">Primera consulta</span><span class="vv">${p.date}</span></div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn btn-p" onclick="editPaciente('${p.id}')"><i class="ti ti-edit" style="font-size:12px"></i>Editar historial</button>
+      <button class="btn" onclick="toast('Historial impreso')"><i class="ti ti-printer" style="font-size:12px"></i>Imprimir</button>
+    </div>
+  </div>`;
+}
+
+function renderFarmacia(){
+  const items=DB.farmacia.map(f=>{
+    const pct=Math.round(f.stock/f.max*100);
+    const barColor=f.status==='Normal'?'#639922':f.status==='Bajo'?'#BA7517':'#A32D2D';
+    return`<div class="farm-item">
+      <div style="flex:1">
+        <div class="farm-name">${f.name}</div>
+        <div class="farm-det">${f.id} · ${f.stock}/${f.max} ${f.unit}</div>
+        <div class="stock-bar" style="width:${pct}%;background:${barColor}"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-left:12px">
+        <span class="pill ${SC4[f.status]}">${f.status}</span>
+        <span class="ract" onclick="pedirFarmacia('${f.id}')"><i class="ti ti-plus"></i></span>
+        <span class="ract" onclick="editFarmacia('${f.id}')"><i class="ti ti-edit"></i></span>
+      </div>
+    </div>`;}).join('');
+  return`<div class="page-head"><div><div class="page-title">Farmacia</div><div class="page-sub">${DB.farmacia.filter(f=>f.status!=='Normal').length} medicamentos con stock bajo</div></div>
+  <div class="hbtns">
+    <button class="btn btn-danger" onclick="toast('Pedido de urgencia enviado')"><i class="ti ti-alert-triangle" style="font-size:12px"></i>Pedido urgente</button>
+    <button class="btn btn-p" onclick="newFarmacia()"><i class="ti ti-plus" style="font-size:12px"></i>Agregar medicamento</button>
+  </div></div>
+  <div class="card">${items}</div>`;
+}
+
+function renderLab(){
+  const rows=DB.lab.map(l=>`<tr>
+    <td style="font-size:11px;color:var(--color-text-secondary)">${l.id}</td>
+    <td>${l.patient}</td><td>${l.test}</td><td>${l.date}</td>
+    <td><span class="pill ${SC5[l.status]}">${l.status}</span></td>
+    <td>${l.result}</td>
+    <td style="text-align:center">
+      <span class="ract" onclick="viewLab('${l.id}')"><i class="ti ti-eye"></i></span>
+      <span class="ract" onclick="editLab('${l.id}')"><i class="ti ti-edit"></i></span>
+    </td></tr>`).join('');
+  return`<div class="page-head"><div><div class="page-title">Laboratorio</div><div class="page-sub">${DB.lab.filter(l=>l.status==='Listo').length} resultados disponibles</div></div>
+  <div class="hbtns"><button class="btn btn-p" onclick="newLab()"><i class="ti ti-plus" style="font-size:12px"></i>Nueva solicitud</button></div></div>
+  <div class="card"><div style="overflow-x:auto"><table class="tbl">
+  <thead><tr><th>ID</th><th>Paciente</th><th>Prueba</th><th>Fecha</th><th>Estado</th><th>Resultado</th><th></th></tr></thead>
+  <tbody>${rows}</tbody></table></div></div>`;
+}
+
+function renderHosp(){
+  const libre=DB.camas.filter(c=>c.status==='Libre').length;
+  const ocup=DB.camas.filter(c=>c.status==='Ocupada').length;
+  const rows=DB.camas.map(c=>`<tr>
+    <td style="font-weight:500">${c.id}</td><td>${c.planta}</td><td>${c.dept}</td>
+    <td>${c.patient||'—'}</td><td>${c.desde||'—'}</td>
+    <td><span class="pill ${SC6[c.status]}">${c.status}</span></td>
+    <td style="text-align:center">
+      <span class="ract" onclick="asignarCama('${c.id}')"><i class="ti ti-user-plus"></i></span>
+      <span class="ract" onclick="liberarCama('${c.id}')"><i class="ti ti-logout"></i></span>
+    </td></tr>`).join('');
+  return`<div class="page-head"><div><div class="page-title">Hospitalización</div><div class="page-sub">${ocup} ocupadas · ${libre} disponibles</div></div></div>
+  <div class="kpis">
+    <div class="kpi"><div class="kpi-lbl"><i class="ti ti-bed" style="font-size:13px;color:#185FA5"></i>Total camas</div><div class="kpi-val">${DB.camas.length}</div></div>
+    <div class="kpi"><div class="kpi-lbl" style="color:var(--color-text-danger)"><i class="ti ti-bed" style="font-size:13px"></i>Ocupadas</div><div class="kpi-val">${ocup}</div></div>
+    <div class="kpi"><div class="kpi-lbl" style="color:var(--color-text-success)"><i class="ti ti-bed" style="font-size:13px"></i>Libres</div><div class="kpi-val">${libre}</div></div>
+    <div class="kpi"><div class="kpi-lbl" style="color:var(--color-text-warning)"><i class="ti ti-bed" style="font-size:13px"></i>En limpieza</div><div class="kpi-val">${DB.camas.filter(c=>c.status==='Limpieza').length}</div></div>
+  </div>
+  <div class="card"><div style="overflow-x:auto"><table class="tbl">
+  <thead><tr><th>Cama</th><th>Planta</th><th>Servicio</th><th>Paciente</th><th>Desde</th><th>Estado</th><th></th></tr></thead>
+  <tbody>${rows}</tbody></table></div></div>`;
+}
+
+function renderFacturacion(){
+  const total=DB.facturas.reduce((a,f)=>a+f.total,0);
+  const pend=DB.facturas.filter(f=>f.status==='Pendiente').reduce((a,f)=>a+f.total,0);
+  const rows=DB.facturas.map(f=>`<tr>
+    <td style="font-size:11px;color:var(--color-text-secondary)">${f.id}</td>
+    <td>${f.patient}</td><td>${f.concepto}</td><td>${f.fecha}</td>
+    <td style="font-weight:500">$${f.total.toLocaleString()}</td>
+    <td><span class="pill ${SC7[f.status]}">${f.status}</span></td>
+    <td style="text-align:center">
+      <span class="ract" onclick="pagarFactura('${f.id}')"><i class="ti ti-cash"></i></span>
+      <span class="ract" onclick="imprimirFactura('${f.id}')"><i class="ti ti-printer"></i></span>
+    </td></tr>`).join('');
+  return`<div class="page-head"><div><div class="page-title">Facturación</div><div class="page-sub">${DB.facturas.length} facturas</div></div>
+  <div class="hbtns"><button class="btn btn-p" onclick="newFactura()"><i class="ti ti-plus" style="font-size:12px"></i>Nueva factura</button></div></div>
+  <div class="kpis">
+    <div class="kpi"><div class="kpi-lbl"><i class="ti ti-cash" style="font-size:13px;color:#185FA5"></i>Total facturado</div><div class="kpi-val">$${total.toLocaleString()}</div></div>
+    <div class="kpi"><div class="kpi-lbl" style="color:var(--color-text-warning)"><i class="ti ti-clock" style="font-size:13px"></i>Pendiente</div><div class="kpi-val">$${pend.toLocaleString()}</div></div>
+    <div class="kpi"><div class="kpi-lbl" style="color:var(--color-text-success)"><i class="ti ti-check" style="font-size:13px"></i>Cobrado</div><div class="kpi-val">$${(total-pend).toLocaleString()}</div></div>
+    <div class="kpi"><div class="kpi-lbl"><i class="ti ti-file" style="font-size:13px;color:#534AB7"></i>Facturas pendientes</div><div class="kpi-val">${DB.facturas.filter(f=>f.status==='Pendiente').length}</div></div>
+  </div>
+  <div class="card"><div style="overflow-x:auto"><table class="tbl">
+  <thead><tr><th>ID</th><th>Paciente</th><th>Concepto</th><th>Fecha</th><th>Total</th><th>Estado</th><th></th></tr></thead>
+  <tbody>${rows}</tbody></table></div></div>`;
+}
+
+function renderReportes(){
+  const depts=['Cardiología','Neurología','Traumatología','Oncología','Pediatría','Urgencias'];
+  return`<div class="page-head"><div><div class="page-title">Reportes</div><div class="page-sub">Estadísticas del sistema</div></div>
+  <div class="hbtns"><button class="btn" onclick="toast('Reporte exportado')"><i class="ti ti-download" style="font-size:12px"></i>Exportar PDF</button></div></div>
+  <div class="grid2">
+    <div class="card"><div class="ch"><span class="ct">Pacientes por servicio</span></div>
+    <div class="bar-wrap">
+    ${depts.map(d=>{const n=DB.patients.filter(p=>p.dept===d).length;const pct=Math.round(n/DB.patients.length*100);
+    return`<div class="bar-row"><div class="bar-lbl">${d}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:#378ADD"></div></div><div class="bar-num">${n}</div></div>`;}).join('')}
+    </div>
+    <div class="ch" style="border-top:0.5px solid var(--color-border-tertiary);border-bottom:none"><span class="ct">Estado de pacientes</span></div>
+    <div class="bar-wrap">
+    ${['Activo','Hospitalizado','Alta','Urgente'].map(s=>{const n=DB.patients.filter(p=>p.status===s).length;const pct=Math.round(n/DB.patients.length*100);const col={Activo:'#639922',Hospitalizado:'#378ADD',Alta:'#888780',Urgente:'#A32D2D'}[s];
+    return`<div class="bar-row"><div class="bar-lbl">${s}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${col}"></div></div><div class="bar-num">${n}</div></div>`;}).join('')}
+    </div></div>
+    <div class="side-stack">
+      <div class="card"><div class="ch"><span class="ct">Resumen general</span></div>
+      <div class="stat-grid">
+        <div class="stat-item"><div class="stat-lbl">Pacientes</div><div class="stat-val">${DB.patients.length}</div></div>
+        <div class="stat-item"><div class="stat-lbl">Médicos</div><div class="stat-val">${DB.medicos.length}</div></div>
+        <div class="stat-item"><div class="stat-lbl">Camas</div><div class="stat-val">${DB.camas.length}</div></div>
+        <div class="stat-item"><div class="stat-lbl">Análisis lab.</div><div class="stat-val">${DB.lab.length}</div></div>
+      </div></div>
+      <div class="card"><div class="ch"><span class="ct">Stock farmacia</span></div>
+      <div class="bar-wrap">
+      ${DB.farmacia.map(f=>{const pct=Math.round(f.stock/f.max*100);const col=f.status==='Normal'?'#639922':f.status==='Bajo'?'#BA7517':'#A32D2D';
+      return`<div class="bar-row"><div class="bar-lbl" style="width:100px;font-size:10px;overflow:hidden;text-overflow:ellipsis">${f.name.split(' ')[0]}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${col}"></div></div><div class="bar-num">${pct}%</div></div>`;}).join('')}
+      </div></div>
+    </div>
+  </div>`;
+}
+
+function showModal(html){document.getElementById('modal-area').innerHTML=`<div class="modal-bg">${html}</div>`;}
+function formVal(id){return document.getElementById(id)?.value||'';}
+
+function newPaciente(){
+  const nextId='P-'+(1000+DB.patients.length+1);
+  showModal(`<div class="modal"><div class="mh"><span class="mt">Nuevo paciente</span><button class="btn" onclick="closeModal()"><i class="ti ti-x" style="font-size:13px"></i></button></div>
+  <div class="mc"><div class="mf">
+    <div class="fg2"><div class="fg"><div class="fl">ID (auto)</div><input id="np-id" value="${nextId}" readonly style="color:var(--color-text-secondary)"></div>
+    <div class="fg"><div class="fl">Fecha de registro</div><input id="np-date" type="date" value="2026-05-24"></div></div>
+    <div class="fg"><div class="fl">Nombre completo *</div><input id="np-name" placeholder="Nombre Apellido"></div>
+    <div class="fg2">
+      <div class="fg"><div class="fl">Edad</div><input id="np-age" type="number" min="0" max="120" placeholder="Años"></div>
+      <div class="fg"><div class="fl">Sexo</div><select id="np-sex"><option value="F">Femenino</option><option value="M">Masculino</option></select></div>
+    </div>
+    <div class="fg2">
+      <div class="fg"><div class="fl">Grupo sanguíneo</div><select id="np-blood"><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+      <div class="fg"><div class="fl">Servicio</div><select id="np-dept"><option>Cardiología</option><option>Neurología</option><option>Traumatología</option><option>Pediatría</option><option>Oncología</option><option>Urgencias</option></select></div>
+    </div>
+    <div class="fg"><div class="fl">Diagnóstico</div><input id="np-dx" placeholder="Diagnóstico principal"></div>
+    <div class="fg2">
+      <div class="fg"><div class="fl">Teléfono</div><input id="np-phone" placeholder="555-0000"></div>
+      <div class="fg"><div class="fl">Estado</div><select id="np-status"><option>Activo</option><option>Hospitalizado</option><option>Alta</option><option>Urgente</option></select></div>
+    </div>
+    <div class="fg"><div class="fl">Email</div><input id="np-email" type="email" placeholder="email@ejemplo.com"></div>
+  </div></div>
+  <div class="mfoot"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn btn-p" onclick="savePaciente()">Guardar paciente</button></div></div>`);
+}
+
+function savePaciente(){
+  const name=formVal('np-name');
+  if(!name){toast('El nombre es obligatorio',false);return;}
+  DB.patients.unshift({id:formVal('np-id'),name,age:parseInt(formVal('np-age'))||0,sex:formVal('np-sex'),blood:formVal('np-blood'),dept:formVal('np-dept'),dx:formVal('np-dx'),status:formVal('np-status'),phone:formVal('np-phone'),email:formVal('np-email'),date:formVal('np-date')});
+  closeModal();render('pacientes');toast('Paciente registrado correctamente');
+}
+
+function editPaciente(id){
+  const p=DB.patients.find(x=>x.id===id);if(!p)return;
+  showModal(`<div class="modal"><div class="mh"><span class="mt">Editar — ${p.name}</span><button class="btn" onclick="closeModal()"><i class="ti ti-x" style="font-size:13px"></i></button></div>
+  <div class="mc"><div class="mf">
+    <div class="fg"><div class="fl">Nombre completo</div><input id="ep-name" value="${p.name}"></div>
+    <div class="fg2">
+      <div class="fg"><div class="fl">Edad</div><input id="ep-age" type="number" value="${p.age}"></div>
+      <div class="fg"><div class="fl">Sexo</div><select id="ep-sex"><option ${p.sex==='F'?'selected':''} value="F">Femenino</option><option ${p.sex==='M'?'selected':''} value="M">Masculino</option></select></div>
+    </div>
+    <div class="fg"><div class="fl">Diagnóstico</div><input id="ep-dx" value="${p.dx}"></div>
+    <div class="fg2">
+      <div class="fg"><div class="fl">Servicio</div><select id="ep-dept"><option ${p.dept==='Cardiología'?'selected':''}>Cardiología</option><option ${p.dept==='Neurología'?'selected':''}>Neurología</option><option ${p.dept==='Traumatología'?'selected':''}>Traumatología</option><option ${p.dept==='Pediatría'?'selected':''}>Pediatría</option><option ${p.dept==='Oncología'?'selected':''}>Oncología</option><option ${p.dept==='Urgencias'?'selected':''}>Urgencias</option></select></div>
+      <div class="fg"><div class="fl">Estado</div><select id="ep-status"><option ${p.status==='Activo'?'selected':''}>Activo</option><option ${p.status==='Hospitalizado'?'selected':''}>Hospitalizado</option><option ${p.status==='Alta'?'selected':''}>Alta</option><option ${p.status==='Urgente'?'selected':''}>Urgente</option></select></div>
+    </div>
+    <div class="fg"><div class="fl">Teléfono</div><input id="ep-phone" value="${p.phone}"></div>
+    <div class="fg"><div class="fl">Email</div><input id="ep-email" value="${p.email}"></div>
+  </div></div>
+  <div class="mfoot"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn btn-p" onclick="updatePaciente('${id}')">Guardar cambios</button></div></div>`);
+}
+
+function updatePaciente(id){
+  const p=DB.patients.find(x=>x.id===id);if(!p)return;
+  p.name=formVal('ep-name');p.age=parseInt(formVal('ep-age'))||p.age;
+  p.sex=formVal('ep-sex');p.dx=formVal('ep-dx');p.dept=formVal('ep-dept');
+  p.status=formVal('ep-status');p.phone=formVal('ep-phone');p.email=formVal('ep-email');
+  closeModal();render('pacientes');toast('Cambios guardados');
+}
+
+function deletePaciente(id){
+  const p=DB.patients.find(x=>x.id===id);if(!p)return;
+  showModal(`<div class="modal"><div class="mh"><span class="mt">Eliminar paciente</span></div>
+  <div class="mc"><p style="font-size:13px;color:var(--color-text-secondary)">¿Eliminar a <strong>${p.name}</strong> (${p.id}) del sistema? Esta acción no se puede deshacer.</p></div>
+  <div class="mfoot"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn btn-danger" onclick="confirmDelete('${id}')"><i class="ti ti-trash" style="font-size:12px"></i>Eliminar</button></div></div>`);
+}
+function confirmDelete(id){DB.patients=DB.patients.filter(x=>x.id!==id);closeModal();render('pacientes');toast('Paciente eliminado');}
+
+function viewPaciente(id){
+  const p=DB.patients.find(x=>x.id===id);if(!p)return;
+  const c=pcolor(p.name);
+  showModal(`<div class="modal"><div class="mh"><span class="mt">Expediente — ${p.id}</span><button class="btn" onclick="closeModal()"><i class="ti ti-x" style="font-size:13px"></i></button></div>
+  <div class="vc-head" style="background:var(--color-background-secondary)"><div class="vc-av" style="background:${c.bg};color:${c.tc}">${ini(p.name)}</div>
+  <div><div style="font-size:13px;font-weight:500">${p.name}</div><div style="font-size:11px;color:var(--color-text-secondary)">${p.dept}</div></div>
+  <span class="pill ${SC[p.status]}" style="margin-left:auto">${p.status}</span></div>
+  <div class="vc-body">
+    <div class="vrow"><span class="vl">Diagnóstico</span><span class="vv">${p.dx}</span></div>
+    <div class="vrow"><span class="vl">Edad / Sexo</span><span class="vv">${p.age}a · ${p.sex==='F'?'Femenino':'Masculino'}</span></div>
+    <div class="vrow"><span class="vl">Grupo sanguíneo</span><span class="vv">${p.blood}</span></div>
+    <div class="vrow"><span class="vl">Teléfono</span><span class="vv">${p.phone}</span></div>
+    <div class="vrow"><span class="vl">Email</span><span class="vv">${p.email}</span></div>
+    <div class="vrow"><span class="vl">Registro</span><span class="vv">${p.date}</span></div>
+  </div>
+  <div class="mfoot"><button class="btn" onclick="closeModal()">Cerrar</button><button class="btn btn-p" onclick="closeModal();editPaciente('${id}')"><i class="ti ti-edit" style="font-size:12px"></i>Editar</button></div></div>`);
+}
+
+function exportPacientes(){
+  const header='ID,Nombre,Edad,Sexo,Sangre,Servicio,Diagnóstico,Estado,Teléfono,Email,Fecha\n';
+  const rows=DB.patients.map(p=>[p.id,p.name,p.age,p.sex,p.blood,p.dept,p.dx,p.status,p.phone,p.email,p.date].join(',')).join('\n');
+  toast('CSV exportado: '+DB.patients.length+' pacientes');
+}
+
+function newCita(){
+  showModal(`<div class="modal"><div class="mh"><span class="mt">Nueva cita</span><button class="btn" onclick="closeModal()"><i class="ti ti-x" style="font-size:13px"></i></button></div>
+  <div class="mc"><div class="mf">
+    <div class="fg"><div class="fl">Paciente *</div><input id="nc-patient" placeholder="Nombre del paciente"></div>
+    <div class="fg"><div class="fl">Médico *</div><select id="nc-doctor">${DB.medicos.map(m=>`<option>${m.name}</option>`).join('')}</select></div>
+    <div class="fg"><div class="fl">Servicio</div><select id="nc-dept"><option>Cardiología</option><option>Neurología</option><option>Traumatología</option><option>Pediatría</option><option>Oncología</option><option>Urgencias</option></select></div>
+    <div class="fg2">
+      <div class="fg"><div class="fl">Fecha</div><input id="nc-date" type="date" value="2026-05-24"></div>
+      <div class="fg"><div class="fl">Hora</div><input id="nc-time" type="time" value="09:00"></div>
+    </div>
+  </div></div>
+  <div class="mfoot"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn btn-p" onclick="saveCita()">Agendar cita</button></div></div>`);
+}
+function saveCita(){
+  const patient=formVal('nc-patient');if(!patient){toast('El paciente es obligatorio',false);return;}
+  const id='C-'+(DB.citas.length+1).toString().padStart(3,'0');
+  DB.citas.unshift({id,patient,doctor:formVal('nc-doctor'),dept:formVal('nc-dept'),date:formVal('nc-date'),time:formVal('nc-time'),status:'Pendiente'});
+  closeModal();render('citas');toast('Cita agendada');
+}
+function confirmCita(id){const c=DB.citas.find(x=>x.id===id);if(c){c.status='Confirmada';render('citas');toast('Cita confirmada');}}
+function cancelCita(id){const c=DB.citas.find(x=>x.id===id);if(c){c.status='Cancelada';render('citas');toast('Cita cancelada');}}
+function editCita(id){const c=DB.citas.find(x=>x.id===id);if(c){toast('Editando cita '+id);}}
+
+function newMedico(){
+  showModal(`<div class="modal"><div class="mh"><span class="mt">Agregar médico</span><button class="btn" onclick="closeModal()"><i class="ti ti-x" style="font-size:13px"></i></button></div>
+  <div class="mc"><div class="mf">
+    <div class="fg"><div class="fl">Nombre completo *</div><input id="nm-name" placeholder="Dr. Nombre Apellido"></div>
+    <div class="fg"><div class="fl">Especialidad</div><input id="nm-esp" placeholder="Especialidad clínica"></div>
+    <div class="fg2">
+      <div class="fg"><div class="fl">Servicio</div><select id="nm-dept"><option>Cardiología</option><option>Neurología</option><option>Traumatología</option><option>Pediatría</option><option>Oncología</option><option>Urgencias</option></select></div>
+      <div class="fg"><div class="fl">Turno</div><select id="nm-turno"><option>Mañana</option><option>Tarde</option><option>Noche</option></select></div>
+    </div>
+  </div></div>
+  <div class="mfoot"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn btn-p" onclick="saveMedico()">Guardar</button></div></div>`);
+}
+function saveMedico(){
+  const name=formVal('nm-name');if(!name){toast('El nombre es obligatorio',false);return;}
+  const id='M-'+(DB.medicos.length+1).toString().padStart(3,'0');
+  DB.medicos.unshift({id,name,dept:formVal('nm-dept'),esp:formVal('nm-esp'),status:'Disponible',pacientes:0,turno:formVal('nm-turno')});
+  closeModal();render('medicos');toast('Médico registrado');
+}
+function viewMedico(id){const m=DB.medicos.find(x=>x.id===id);if(m)toast('Perfil: '+m.name+' · '+m.esp);}
+function editMedico(id){const m=DB.medicos.find(x=>x.id===id);if(m)toast('Editando: '+m.name);}
+
+function newFarmacia(){
+  showModal(`<div class="modal"><div class="mh"><span class="mt">Agregar medicamento</span><button class="btn" onclick="closeModal()"><i class="ti ti-x" style="font-size:13px"></i></button></div>
+  <div class="mc"><div class="mf">
+    <div class="fg"><div class="fl">Nombre del medicamento *</div><input id="nf-name" placeholder="Nombre y concentración"></div>
+    <div class="fg2">
+      <div class="fg"><div class="fl">Stock actual</div><input id="nf-stock" type="number" min="0" placeholder="0"></div>
+      <div class="fg"><div class="fl">Stock máximo</div><input id="nf-max" type="number" min="1" placeholder="100"></div>
+    </div>
+    <div class="fg"><div class="fl">Unidad</div><input id="nf-unit" placeholder="comprimidos, viales, ampollas…"></div>
+  </div></div>
+  <div class="mfoot"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn btn-p" onclick="saveFarmacia()">Guardar</button></div></div>`);
+}
+function saveFarmacia(){
+  const name=formVal('nf-name');if(!name){toast('El nombre es obligatorio',false);return;}
+  const stock=parseInt(formVal('nf-stock'))||0;const max=parseInt(formVal('nf-max'))||100;
+  const status=stock/max<0.15?'Crítico':stock/max<0.4?'Bajo':'Normal';
+  const id='F-'+(DB.farmacia.length+1).toString().padStart(3,'0');
+  DB.farmacia.push({id,name,stock,max,unit:formVal('nf-unit')||'unidades',status});
+  closeModal();render('farmacia');toast('Medicamento registrado');
+}
+function pedirFarmacia(id){const f=DB.farmacia.find(x=>x.id===id);if(f){f.stock=f.max;f.status='Normal';render('farmacia');toast('Pedido realizado — stock repuesto al máximo');}}
+function editFarmacia(id){const f=DB.farmacia.find(x=>x.id===id);if(f)toast('Editando: '+f.name);}
+
+function newLab(){
+  showModal(`<div class="modal"><div class="mh"><span class="mt">Nueva solicitud de laboratorio</span><button class="btn" onclick="closeModal()"><i class="ti ti-x" style="font-size:13px"></i></button></div>
+  <div class="mc"><div class="mf">
+    <div class="fg"><div class="fl">Paciente *</div><input id="nl-patient" placeholder="Nombre del paciente"></div>
+    <div class="fg"><div class="fl">Prueba solicitada</div><input id="nl-test" placeholder="Hemograma, bioquímica, imagen…"></div>
+    <div class="fg"><div class="fl">Fecha</div><input id="nl-date" type="date" value="2026-05-24"></div>
+  </div></div>
+  <div class="mfoot"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn btn-p" onclick="saveLab()">Solicitar</button></div></div>`);
+}
+function saveLab(){
+  const patient=formVal('nl-patient');if(!patient){toast('El paciente es obligatorio',false);return;}
+  const id='L-'+(DB.lab.length+1).toString().padStart(3,'0');
+  DB.lab.unshift({id,patient,test:formVal('nl-test')||'General',date:formVal('nl-date'),status:'Pendiente',result:'—'});
+  closeModal();render('laboratorio');toast('Solicitud enviada al laboratorio');
+}
+function viewLab(id){const l=DB.lab.find(x=>x.id===id);if(l)toast('Resultado: '+l.result);}
+function editLab(id){const l=DB.lab.find(x=>x.id===id);if(l){l.status='Listo';if(l.result==='—')l.result='Valores dentro del rango normal';render('laboratorio');toast('Resultado actualizado');}}
+
+function asignarCama(id){
+  const c=DB.camas.find(x=>x.id===id);if(!c)return;
+  if(c.status==='Ocupada'){toast('Cama ya ocupada — libérala primero',false);return;}
+  showModal(`<div class="modal"><div class="mh"><span class="mt">Asignar cama ${id}</span><button class="btn" onclick="closeModal()"><i class="ti ti-x" style="font-size:13px"></i></button></div>
+  <div class="mc"><div class="mf">
+    <div class="fg"><div class="fl">Paciente</div><select id="ac-p">${DB.patients.filter(p=>p.status==='Hospitalizado'||p.status==='Urgente').map(p=>`<option value="${p.name}">${p.name}</option>`).join('')}</select></div>
+  </div></div>
+  <div class="mfoot"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn btn-p" onclick="doAsignar('${id}')">Asignar</button></div></div>`);
+}
+function doAsignar(id){const c=DB.camas.find(x=>x.id===id);if(c){c.patient=formVal('ac-p');c.status='Ocupada';c.desde=new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'2-digit'});closeModal();render('hospitalizacion');toast('Cama '+id+' asignada');}}
+function liberarCama(id){const c=DB.camas.find(x=>x.id===id);if(c){c.patient='';c.status='Limpieza';c.desde='';render('hospitalizacion');toast('Cama '+id+' en proceso de limpieza');}}
+
+function newFactura(){
+  showModal(`<div class="modal"><div class="mh"><span class="mt">Nueva factura</span><button class="btn" onclick="closeModal()"><i class="ti ti-x" style="font-size:13px"></i></button></div>
+  <div class="mc"><div class="mf">
+    <div class="fg"><div class="fl">Paciente *</div><select id="nfac-p">${DB.patients.map(p=>`<option>${p.name}</option>`).join('')}</select></div>
+    <div class="fg"><div class="fl">Concepto</div><input id="nfac-c" placeholder="Descripción de servicios"></div>
+    <div class="fg2">
+      <div class="fg"><div class="fl">Total ($)</div><input id="nfac-t" type="number" min="0" placeholder="0"></div>
+      <div class="fg"><div class="fl">Fecha</div><input id="nfac-f" type="date" value="2026-05-24"></div>
+    </div>
+  </div></div>
+  <div class="mfoot"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn btn-p" onclick="saveFactura()">Crear factura</button></div></div>`);
+}
+function saveFactura(){
+  const patient=formVal('nfac-p');if(!patient){toast('El paciente es obligatorio',false);return;}
+  const id='FAC-'+(2029+DB.facturas.length);
+  DB.facturas.unshift({id,patient,concepto:formVal('nfac-c')||'Servicios médicos',total:parseFloat(formVal('nfac-t'))||0,status:'Pendiente',fecha:formVal('nfac-f')});
+  closeModal();render('facturacion');toast('Factura creada: '+id);
+}
+function pagarFactura(id){const f=DB.facturas.find(x=>x.id===id);if(f){f.status='Pagada';render('facturacion');toast('Pago registrado: '+id);}}
+function imprimirFactura(id){const f=DB.facturas.find(x=>x.id===id);if(f)toast('Factura '+id+' enviada a impresora');}
+
+render('dashboard');
+</script>
