@@ -1,0 +1,7 @@
+http://localhost/hospital/conexion.php
+
+nuevo
+localhost/hospital/formulario.html
+
+nuevo 
+http://localhost/hospital/index.html

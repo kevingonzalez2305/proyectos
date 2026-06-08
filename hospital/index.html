@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hospital Central</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --secondary:#0f172a;
+    --bg:#eef4ff;
+    --card:#ffffff;
+    --text:#1e293b;
+    --text-light:#64748b;
+    --border:#dbeafe;
+    --shadow:0 10px 30px rgba(37,99,235,0.12);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#dbeafe,#eef2ff,#f8fafc);
+    min-height:100vh;
+    padding:40px 20px;
+    color:var(--text);
+}
+
+header{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.logo{
+    width:100px;
+    height:100px;
+    margin:0 auto 20px;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.logo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+header h1{
+    font-size:3rem;
+    font-weight:700;
+    color:var(--secondary);
+}
+
+header p{
+    color:var(--text-light);
+    margin-top:10px;
+    font-size:1rem;
+}
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:30px;
+}
+
+form{
+    background:rgba(255,255,255,0.95);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.5);
+    border-radius:24px;
+    padding:30px;
+    box-shadow:var(--shadow);
+    transition:0.3s;
+    position:relative;
+    overflow:hidden;
+}
+
+form::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:6px;
+    background:linear-gradient(90deg,var(--primary),#60a5fa);
+}
+
+form:hover{
+    transform:translateY(-8px);
+}
+
+h2{
+    font-size:1.4rem;
+    margin-bottom:25px;
+    color:var(--secondary);
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.icon{
+    width:45px;
+    height:45px;
+    border-radius:14px;
+    background:linear-gradient(135deg,var(--primary),#60a5fa);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:20px;
+    box-shadow:0 5px 15px rgba(37,99,235,0.3);
+}
+
+.titulo-img{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.img-consulta{
+    width:45px;
+    height:45px;
+    object-fit:cover;
+    border-radius:14px;
+    display:block;
+    box-shadow:0 5px 15px rgba(37,99,235,0.3);
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-size:0.9rem;
+    font-weight:600;
+    color:var(--secondary);
+}
+
+input{
+    width:100%;
+    padding:14px 16px;
+    margin-bottom:20px;
+    border:2px solid var(--border);
+    border-radius:14px;
+    font-size:0.95rem;
+    transition:0.3s;
+    background:#f8fbff;
+}
+
+input:focus{
+    outline:none;
+    border-color:var(--primary);
+    background:white;
+    box-shadow:0 0 0 5px rgba(37,99,235,0.1);
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+    color:white;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 8px 20px rgba(37,99,235,0.25);
+}
+
+button:hover{
+    transform:scale(1.02);
+    box-shadow:0 12px 25px rgba(37,99,235,0.35);
+}
+
+footer{
+    text-align:center;
+    margin-top:50px;
+    color:var(--text-light);
+    font-size:0.9rem;
+}
+
+@media(max-width:768px){
+
+    header h1{
+        font-size:2.2rem;
+    }
+
+    .container{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+<div class="logo">
+<img src="imagen.jpg">
+</div>
+
+<h1>Hospital Central</h1>
+<center><a href="http://localhost/phpmyadmin/index.php?route=/database/structure&db=hospital">revisar base de datos</a></center>
+<p>Sistema profesional de gestión médica</p>
+
+</header>
+
+<div class="container">
+
+<form action="guardar.php" method="POST">
+
+<h2>
+<div class="icon">👨‍⚕️</div>
+Pacientes
+</h2>
+<a href="http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=hospital&table=pacientes">visualizar</a>
+<label>Nombre</label>
+<input type="text" name="nombre" placeholder="Ingrese nombre del paciente" required>
+
+<label>Motivo Consulta</label>
+<input type="text" name="motivo_consulta" placeholder="Ingrese motivo de consulta" required>
+
+<label>Ciudad</label>
+<input type="text" name="ciudad" placeholder="Ingrese ciudad" required>
+
+<button type="submit">Guardar Paciente</button>
+
+</form>
+
+<form action="guardar_doctor.php" method="POST">
+
+<h2>
+<div class="icon">🩺</div>
+Doctores
+</h2>
+<a href="http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=hospital&table=doctores">visualizar</a>
+<label>Nombre</label>
+<input type="text" name="nombre" placeholder="Ingrese nombre del doctor" required>
+
+<label>Especialidad</label>
+<input type="text" name="especialidad" placeholder="Ingrese especialidad" required>
+
+<label>Ciudad</label>
+<input type="text" name="ciudad" placeholder="Ingrese ciudad" required>
+
+<button type="submit">Guardar Doctor</button>
+
+</form>
+
+<form action="guardar_medicamento.php" method="POST">
+
+<h2>
+<div class="icon">💊</div>
+Medicamentos
+</h2>
+<a href="http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=hospital&table=medicamentos">visualizar</a>
+<label>Nombre</label>
+<input type="text" name="nombre" placeholder="Ingrese medicamento" required>
+
+<label>Uso Medicamento</label>
+<input type="text" name="uso_medicamento" placeholder="Ingrese uso del medicamento" required>
+
+<label>Ciudad</label>
+<input type="text" name="ciudad" placeholder="Ingrese ciudad" required>
+
+<button type="submit">Guardar Medicamento</button>
+
+</form>
+
+<form action="guardar_consulta.php" method="POST">
+
+<h2 class="titulo-img">
+<img src="imagen.jpg" class="img-consulta">
+Consultas
+</h2>
+<a href="http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=hospital&table=consultas">visualizar</a>
+<label>Nombre Paciente</label>
+<input type="text" name="nombre_paciente" placeholder="Ingrese paciente" required>
+
+<label>Motivo Consulta</label>
+<input type="text" name="motivo_consulta" placeholder="Ingrese motivo" required>
+
+<label>Ciudad</label>
+<input type="text" name="ciudad" placeholder="Ingrese ciudad" required>
+
+<button type="submit">Guardar Consulta</button>
+
+</form>
+
+</div>
+
+<footer>
+© 2026 Hospital Central | Sistema Médico Profesional
+</footer>
+
+</body>
+</html>
